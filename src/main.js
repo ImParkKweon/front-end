@@ -4,4 +4,7 @@ import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import router from './router.js'
 
+// tailwind
+import './index.css'
+
 createApp(App).use(router).mount('#app');
