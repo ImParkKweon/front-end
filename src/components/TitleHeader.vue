@@ -1,6 +1,30 @@
 <template>
-    <!-- Nav Bar -->
-    <div class="main-nav-bar">
+  <header class="text-gray-600 body-font">
+    <div class="container mx-auto mt-2 flex flex-wrap p-2 flex-col md:flex-row items-center">
+      <a class="flex title-font font-medium items-center text-gray-900 md:mb-0 max-md:mb-4">
+        <span class="text-xl font-extrabold" @click="$router.push('/')">Blueberry</span>
+      </a>
+      <nav
+        class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400	flex flex-wrap items-center text-base justify-center">
+        <a class="mr-5 text-gray-900 font-bold">가격정책</a>
+        <a class="mr-5 text-gray-900 font-bold">도움말</a>
+        <a class="mr-5 text-gray-900 font-bold">고객지원</a>
+      </nav>
+      <div class="flex">
+        <button @click="$router.push('/login')"
+          class="
+          rounded-5 bg-white text-teal-700 border-2 border-[#0F6D74] mr-3 inline-flex items-center py-2.5 px-4 max-md:mt-4 md:mt-0">로그인</button>
+        <button class="
+        border-transparent bg-teal-700 text-white
+        rounded-5
+        inline-flex items-center py-2.5 px-4 max-md:mt-4 md:mt-0 ">회원가입</button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Nav Bar -->
+  <!-- <div class="main-nav-bar">
       <ul class="main-nav-bar-items-left">
         <b @click="$router.push('/')"
         class="main-nav-bar-item-left">Blueberry</b>
@@ -17,27 +41,27 @@
           <button class="main-nav-bar-button-sign-up main-nav-bar-button-text ">회원가입</button>
         </li>
       </ul>
-    </div>
-  </template>
+    </div> -->
+</template>
   
-  <script>
-  
-  export default {
-    name: 'TitleHeader',
-    data() {
-      return {
-        
-      }
-    },
-    methods: {
-    },
-    props: {
-  
+<script>
+
+export default {
+  name: 'TitleHeader',
+  data() {
+    return {
+
     }
+  },
+  methods: {
+  },
+  props: {
+
   }
-  </script>
+}
+</script>
   
-  <style>
-  @import '../css/MainPage.css';
-  </style>
+<style>
+@import '../css/MainPage.css';
+</style>
   
