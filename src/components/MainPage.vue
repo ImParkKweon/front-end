@@ -11,12 +11,14 @@
           <br />
           혁신적인 미래
         </div>
-        <div class="not-italic font-bold text-base ml-1 text-teal-700 leading-10">
+        <div class="not-italic font-bold text-xl ml-1 my-2 text-teal-700 leading-10">
           컴퓨팅 요구 사항을 위한 최고의 솔루션
         </div>
 
         <div>
-          <button class="border-transparent bg-teal-700 text-white font-light flex justify-center items-center rounded-5 px-4 py-2">
+          <button
+            class="hover:bg-teal-800
+            border-transparent bg-teal-700 text-white font-light flex justify-center items-center rounded-5 px-4 py-2.5">
             <span>
               시작하기 &nbsp;
             </span>
@@ -37,18 +39,24 @@
     <!-- 장점 컨테이너 -->
     <div class="flex justify-between my-32 max-md:flex-col">
       <div class="flex items-start sub-introduce-container-box md:w-1/3 m-2">
-        <div class="font-bold text-gray-800 max-lg:text-xl lg:text-3xl mb-1">목적에 따라 <br /> 다양한 플랜 제공</div>
-        <img class="self-end" style="width: 65%;" :src="require('../img/introduce1_img.svg')" />
+        <span class="shine"></span>
+        <div class="font-bold text-gray-800 max-md:text-xl md:text-base lg:text-xl xl:text-3xl mb-3 ">목적에 따라 <br /> 다양한 플랜
+          제공</div>
+        <img class="self-end max-md:mb-5 md:m-1" style="width: 65%;" :src="require('../img/introduce1_img.svg')" />
       </div>
 
       <div class="flex items-start sub-introduce-container-box md:w-1/3 m-2">
-        <div class="font-bold text-gray-800 max-lg:text-xl lg:text-3xl mb-3">원하는 사양의 <br /> 컴퓨터 구성을 빠르게</div>
-        <img class="self-end" style="width: 65%;" :src="require('../img/introduce2_img.svg')" />
+        <span class="shine"></span>
+        <div class="font-bold text-gray-800 max-md:text-xl md:text-base lg:text-xl xl:text-3xl mb-3">원하는 사양의 <br /> 컴퓨터
+          구성을 빠르게</div>
+        <img class="self-end max-md:mb-5 md:m-3" style="width: 65%;" :src="require('../img/introduce2_img.svg')" />
       </div>
 
       <div class="flex items-start sub-introduce-container-box md:w-1/3 m-2">
-        <div class="font-bold text-gray-800 max-lg:text-xl lg:text-3xl mb-3">언제 어디서나 <br /> 클라우드 노트북에 접속</div>
-        <img class="self-end" style="width: 65%;" :src="require('../img/introduce3_img.svg')" />
+        <span class="shine"></span>
+        <div class="font-bold text-gray-800 max-md:text-xl md:text-base lg:text-xl xl:text-3xl mb-3">언제 어디서나 <br /> 클라우드
+          노트북 접속</div>
+        <img class="self-end max-md:mb-5 md:m-3" style="width: 65%;" :src="require('../img/introduce3_img.svg')" />
       </div>
     </div>
   </div>
@@ -62,29 +70,49 @@
     <!-- 서비스 컨테이너 : 캐러셀 UI -->
     <div class="w-full overflow-x-hidden m-auto p-12 flex content-center justify-center relative">
       <!-- 캐러셀 네비게이션 버튼 -->
-      <img v-if="carouselIndex != -1"
-      :src="require('../img/carousel_prev.svg')"
-      class="service-container-carousel-button max-lg:left-[2%] lg:left-[15%]" @click="prev"/>
-      <img v-if="carouselIndex != 1"
-      :src="require('../img/carousel_next.svg')"
-      class="service-container-carousel-button max-lg:right-[2%] lg:right-[15%]" @click="next"/>
+      <img v-if="carouselIndex != -1" :src="require('../img/carousel_prev.svg')"
+        class="service-container-carousel-button max-lg:left-[3%] lg:left-[10%] max-md:w-14" @click="prev" />
+      <img v-if="carouselIndex != 1" :src="require('../img/carousel_next.svg')"
+        class="service-container-carousel-button max-lg:right-[3%] lg:right-[10%] max-md:w-14" @click="next" />
 
       <!-- 캐러셀 -->
-      <div ref="carousel" class="service-container-carousel-items">
-        <div v-for="i in 3" :key="i" class="max-md:m-2 md:m-3 lg:m-10 service-container-carousel-item">
-          <img :src="require('../img/designer_plan_img.svg')" />
-          <div>
-            Service {{ i }}
+      <div ref="carousel" class="service-container-carousel-items lg:w-[200%]">
+        <div v-for="i in plan" :key="i" class="max-md:m-0 md:m-3 lg:m-10 service-container-carousel-item max-md:w-screen max-md:max-h-[700px] max-xl:max-h-[630px] xl:max-h-[700px]">
+          <img class="w-7/12 sm:max-w-[450px] max-sm:w-full m-auto my-5 mb-4" :src="require('../img/' + i.src + '.svg')" />
+          <!-- 서비스 이름 -->
+          <div class="text-5xl max-2xl:text-3xl font-bold text-center">
+            {{ i.name }}
           </div>
-          <div>
-            | 이 서비스는 엄청난 걸 제공합니다!
+
+          <!-- 서비스 설명 -->
+          <div class="text-2xl max-lg:text-xl text-center my-3">
+            {{ i.comment }}
           </div>
-          <div>
-            | 이 서비스는 엄청난 걸 제공합니다!
+
+          <button @click="$router.push('/subscribe');"
+            class="hover:bg-teal-800
+            border-transparent bg-teal-700 text-white font-light flex justify-center items-center rounded-5 px-4 py-2.5 w-1/6 min-w-[150px] m-auto">
+            <span>
+              시작하기 &nbsp;
+            </span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right"
+              viewBox="0 0 16 16">
+              <path fill-rule="evenodd"
+                d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+            </svg>
+          </button>
+
+          <!-- 간단하게 설명된 사양 -->
+          <div class="my-5 m-auto flex max-lg:flex-col max-lg:my-0">
+            <div class="flex items-center content-center justify-center" v-for="j in i.spec" :key="j">
+              <img class="w-7"
+              :src="require('../img/check_circle.svg')"/>
+              <span class="text-xl ml-5 mr-7 max-lg:my-2">
+                {{ j }}
+              </span>
+            </div>
           </div>
-          <div>
-            | 이 서비스는 엄청난 걸 제공합니다!
-          </div>
+          
         </div>
       </div>
     </div>
@@ -99,37 +127,58 @@ export default {
   data() {
     return {
       carouselIndex: 0,
-      // settings: 
-      // {
-      //   itemsToShow: 1,
-      //   snapAlign: 'center',
-      // },
+      plan: [
+        {
+          "src": 'designer_plan_img',
+          "name": "디자이너인 당신을 위해",
+          "comment": "디자인 환경에 적합한 클라우드 노트북 서비스",
+          "spec": [
+            "GPU 대박 1",
+            "스토리지 짱큼 1",
+            "예쁜 Mac OS 1"
+          ]
+        },
+        {
+          "src": 'developer_plan_img',
+          "name": "AI 개발 환경이 필요하신가요?",
+          "comment": "AI 개발 환경을 위한 클라우드 노트북 서비스",
+          "spec": [
+            "GPU 대박 2",
+            "스토리지 짱큼 2",
+            "예쁜 Mac OS 2"
+          ]
+        },
+        {
+          "src": '3Ddesigner_plan_img',
+          "name": "3D 그래픽 어쩌구저쩌구",
+          "comment": "높은 그래픽 사양의 클라우드 노트북 서비스",
+          "spec": [
+            "GPU 대박 3",
+            "스토리지 짱큼 3",
+            "예쁜 Mac OS 3"
+          ]
+        }
+      ]
     }
   },
   methods: {
     prev() {
       let carouselImg = document.querySelector('.service-container-carousel-item');
       let size = carouselImg.clientWidth;
-      let move = 0;
 
-      if (this.carouselIndex == 0) move = 95;
       if (this.carouselIndex < 0) return;
       this.carouselIndex -= 1;
 
-      this.$refs.carousel.style.transform = `translate3d(${-size * this.carouselIndex + move
-        }px, 0, 0)`;
+      this.$refs.carousel.style.transform = `translate3d(${-size * this.carouselIndex}px, 0, 0)`;
     },
     next() {
       let carouselImg = document.querySelector('.service-container-carousel-item');
       let size = carouselImg.clientWidth;
-      let move = 0;
 
-      if (this.carouselIndex == 0) move = -95;
       if (this.carouselIndex > 0) return;
       this.carouselIndex += 1;
 
-      this.$refs.carousel.style.transform = `translate3d(${-size * this.carouselIndex + move
-        }px, 0, 0)`;
+      this.$refs.carousel.style.transform = `translate3d(${-size * this.carouselIndex}px, 0, 0)`;
     },
   },
   mounted() {
@@ -149,6 +198,4 @@ export default {
 }
 </script>
 
-<style>
-@import '../css/MainPage.css';
-</style>
+<style>@import '../css/MainPage.css';</style>

@@ -1,5 +1,5 @@
 <template>
-    <div class="px-4 py-0">
+    <div class="relative container mx-auto px-5 lg:w-9/12">
         <TitleHeader></TitleHeader>
 
         <div class="flex sm:w-1/2 md:w-1/2 lg:w-4/12 xl:w-3/12 flex-col text-center m-auto">
