@@ -25,19 +25,23 @@
         </div>
 
         <div class="flex max-lg:flex-col justify-center content-center my-3">
-            <div class="w-full p-5 mr-3 max-lg:mt-3 rounded-4 border-2 border-gray-200 hover:ring ring-teal-600 ring-offset-4 cursor-pointer
-            focus:ring ring-teal-700 ring-offset-4
-            "
-                v-for="i in osOption" :key="i">
-                <img class="m-auto w-20" :src="require('@/img/' + i.file)" />
+            <div class="mr-4"
+                v-for="(a, i) in osOption" :key="i">
+                <input type="radio" :id="'react-option-' + i" 
+                name="os-type" :value="'react-option-' + i" class="hidden peer">
+                <label :for="'react-option-' + i" class="w-full p-5 mr-24 max-lg:mt-3 rounded-4 border-2 border-gray-200 
+                hover:ring ring-teal-600 ring-offset-4 cursor-pointer cursor-pointer
+                peer-checked:ring ring-teal-700 ring-offset-4 cursor-pointer">
+                <img class="m-auto w-20" :src="require('@/img/' + a.file)" />
                 <div class="text-center">
                     <div class="text-3xl mt-4 font-bold">
-                        {{ i.name }}
+                        {{ a.name }}
                     </div>
                     <div class="mt-3">
-                        {{ i.content }}
+                        {{ a.content }}
                     </div>
                 </div>
+            </label>
             </div>
         </div>
 
