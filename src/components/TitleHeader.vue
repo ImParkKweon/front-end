@@ -13,7 +13,8 @@
       <div class="flex">
         <button @click="$router.push('/login')"
           class="rounded-5 bg-white text-teal-700 border-2 border-[#0F6D74] mr-3 inline-flex items-center py-2.5 px-4 max-md:mt-4 md:mt-0">로그인</button>
-        <button class="
+        <button @click="$router.push('/signup')"
+        class="
         border-transparent bg-teal-700 text-white
         rounded-5
         inline-flex items-center py-2.5 px-4 max-md:mt-4 md:mt-0 ">회원가입</button>

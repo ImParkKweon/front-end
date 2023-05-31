@@ -3,7 +3,7 @@
     <TitleHeader></TitleHeader>
 
     <!-- 소개 컨테이너 -->
-    <div class="flex flex-wrap justify-center items-center mt-5">
+    <div class="flex flex-wrap justify-center items-center mt-5 mx-3">
       <!-- 소개 텍스트 (왼쪽) -->
       <div class="md:w-1/2">
         <div class="not-italic font-bold max-md:text-2xl md:text-3xl xl:text-6xl text-gray-800">
