@@ -3,6 +3,7 @@ import MainPage from './components/MainPage.vue';
 import LoginPage from './components/LoginPage.vue';
 import SubscribePage from './components/SubscribePage.vue';
 import SignupPage from './components/SignupPage.vue';
+import MyPage from './components/MyPage.vue';
 
 const routes = [
   {
@@ -20,6 +21,10 @@ const routes = [
   {
     path: "/signup",
     component: SignupPage,
+  },
+  {
+    path: "/mypage",
+    component: MyPage,
   }
 ];
 

@@ -25,12 +25,12 @@
         </div>
 
         <div class="flex max-lg:flex-col justify-center content-center my-3">
-            <div class="mr-4"
+            <div class="lg:mr-4"
                 v-for="(a, i) in osOption" :key="i">
                 <input type="radio" :id="'react-option-' + i" 
                 name="os-type" :value="'react-option-' + i" class="hidden peer">
-                <label :for="'react-option-' + i" class="w-full p-5 mr-24 max-lg:mt-3 rounded-4 border-2 border-gray-200 
-                hover:ring ring-teal-600 ring-offset-4 cursor-pointer cursor-pointer
+                <label :for="'react-option-' + i" class="w-full p-5 max-lg:mt-3 rounded-4 border-2 border-gray-200 
+                hover:ring ring-1-600 ring-offset-4 cursor-pointer cursor-pointer
                 peer-checked:ring ring-teal-700 ring-offset-4 cursor-pointer">
                 <img class="m-auto w-20" :src="require('@/img/' + a.file)" />
                 <div class="text-center">
@@ -135,6 +135,11 @@
             </div>
         </div>
 
+        <button class="bg-[#00BF9E] hover:bg-[#12B79A] rounded-full px-36 py-4 flex m-auto my-5">
+            <span class="text-white font-semibold text-3xl">
+                완료
+            </span>
+        </button>
 
     </div>
 </template>

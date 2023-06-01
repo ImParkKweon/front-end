@@ -83,3 +83,7 @@
 .service-container-carousel-button:hover {
     transform: scale(1.5);
 }
+
+.special-gradient {
+    background: linear-gradient(126.49deg, rgba(28, 128, 135, 0.19) 0.5%, rgba(177, 177, 177, 0.14) 100%);
+}
