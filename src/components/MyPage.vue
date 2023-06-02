@@ -1,5 +1,5 @@
 <template>
-    <div class="relative container mx-auto px-5 lg:w-9/12">
+    <div class="relative container mx-auto lg:px-5 lg:w-9/12 max-lg:px-2">
         <TitleHeader></TitleHeader>
 
         <div class="my-4">
@@ -8,8 +8,8 @@
 
         <div class="flex flex-auto max-xl:flex-col w-full items-stretch content-normal">
             <!-- 결제한 서비스 (left) -->
-            <div class="mr-3 p-5 rounded-5 special-gradient xl:w-1/2 max-xl:mb-4">
-                <div class="text-4xl font-semibold">
+            <div class="md:mr-3 md:p-12 max-md:p-7 rounded-5 special-gradient xl:w-1/2 max-xl:mb-4">
+                <div class="sm:text-4xl max-sm:text-2xl font-semibold">
                     디자이너인 당신을 위해
                 </div>
                 <div class="text-lg">
@@ -32,17 +32,17 @@
             <!-- 접속, 예상 결제 정보 (right) -->
             <div class="h-full xl:w-1/2">
                 <!-- 접속 정보 -->
-                <div class="mb-3 p-5 rounded-5 special-gradient">
-                    <div class="text-4xl font-semibold">
+                <div class="mb-3 md:mr-3 md:p-12 max-md:p-7 rounded-5 special-gradient">
+                    <div class="sm:text-4xl max-sm:text-2xl font-semibold">
                         접속 정보
                     </div>
 
                     <table class="rounded-4 bg-white mt-4 w-full text-center">
                         <tr>
-                            <td class="py-4 font-semibold">
+                            <td class="py-4 font-semibold border-r-2 border-gray-100">
                                 IP
                             </td>
-                            <td class="py-4 font-semibold">
+                            <td class="py-4 font-semibold border-r-2 border-gray-100">
                                 비밀번호
                             </td>
                             <td class="py-4 font-semibold">
@@ -51,12 +51,13 @@
                         </tr>
 
                         <tr>
-                            <td class="py-4">
+                            <td class="py-4 border-r-2 border-gray-100">
                                 <span>
                                     0.0.0.0
                                 </span>
                             </td>
-                            <td class="py-4">
+                            <td class="py-4 border-r-2 border-gray-100
+                            underline cursor-pointer">
                                 <span>
                                     확인하기
                                 </span>
@@ -71,20 +72,20 @@
                 </div>
 
                 <!-- 예상 결제 정보 -->
-                <div class="p-5 rounded-5 special-gradient">
+                <div class="md:mr-3 md:p-12 max-md:p-7 rounded-5 special-gradient">
                     <div class="flex justify-between">
-                        <div class="text-4xl font-semibold">
+                        <div class="sm:text-4xl max-sm:text-2xl font-semibold">
                             예상 결제 정보
                         </div>
                         
-                        <button class="bg-teal-700 rounded-5 px-4 text-white font-base hover:bg-teal-800">
+                        <button class="bg-teal-700 rounded-5 md:px-4 max-md:px-3 text-white font-base hover:bg-teal-800 max-md:text-sm">
                             구독 취소
                         </button>
                     </div>
 
                     <table class="rounded-4 bg-white mt-4 w-full text-center">
                         <tr>
-                            <td class="py-4 font-semibold">
+                            <td class="py-4 font-semibold border-r-2 border-gray-100">
                                 결제 예상일
                             </td>
                             <td class="py-4 font-semibold">
@@ -93,7 +94,7 @@
                         </tr>
 
                         <tr>
-                            <td class="py-4">
+                            <td class="py-4 border-r-2 border-gray-100">
                                 <span>
                                     2023년 6월 30일
                                 </span>

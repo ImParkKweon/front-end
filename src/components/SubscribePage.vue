@@ -1,12 +1,12 @@
 <template>
-    <div class="relative container mx-auto px-5 lg:w-9/12">
+    <div class="relative container mx-auto lg:px-5 max-lg:px-3 lg:w-full">
         <TitleHeader></TitleHeader>
 
-        <div class="text-center text-5xl font-bold m-5 mb-3">
+        <div class="text-center md:text-5xl max-md:text-4xl max-sm:text-2xl font-bold max-md:m-2 md:m-5 mb-3">
             클라우드 노트북의 사양을 <br />
             취향껏 커스터마이징하세요
         </div>
-        <div class="text-center text-xl">
+        <div class="text-center md:text-xl max-md:text-base">
             다양한 서비스에 맞춰 클라우드 노트북의 기본 사양을 제공합니다.
         </div>
 
@@ -14,13 +14,13 @@
 
         <!-- 1. OS 선택 -->
         <div class="flex justify-left content-center">
-            <img class="w-20" :src="require('@/img/step1.svg')" />
-            <span class="text-4xl ml-3 font-bold self-center">
+            <img class="w-20 max-sm:w-12" :src="require('@/img/step1.svg')" />
+            <span class="max-sm:text-2xl sm:text-4xl ml-3 font-bold self-center">
                 OS 선택
             </span>
         </div>
 
-        <div class="mt-3 ml-4">
+        <div class="mt-3 sm:ml-4 max-sm:ml-2">
             클라우드 노트북의 운영체제를 선택합니다.
         </div>
 
@@ -47,8 +47,8 @@
 
         <!-- 2. CPU/RAM -->
         <div class="flex justify-left content-center">
-            <img class="w-20" :src="require('@/img/step2.svg')" />
-            <span class="text-4xl ml-3 font-bold self-center">
+            <img class="w-20 max-sm:w-12" :src="require('@/img/step2.svg')" />
+            <span class="max-sm:text-2xl text-4xl ml-3 font-bold self-center">
                 CPU/RAM
             </span>
         </div>
@@ -56,7 +56,7 @@
         <div class="flex max-lg:flex-col justify-left content-center p-3">
             <!-- CPU 단위 조정 -->
             <div class="w-1/2 m-2 max-lg:w-full">
-                <div class="text-lg">
+                <div class="sm:text-lg">
                     CPU 단위 조정
                 </div>
 
@@ -66,7 +66,7 @@
 
             <!-- RAM 단위 조정 -->
             <div class="w-1/2 m-2 max-lg:w-full">
-                <div class="text-lg">
+                <div class="sm:text-lg">
                     RAM 단위 조정
                 </div>
 
@@ -77,8 +77,8 @@
 
         <!-- 3. GPU -->
         <div class="flex justify-left content-center">
-            <img class="w-20" :src="require('@/img/step3.svg')" />
-            <span class="text-4xl ml-3 font-bold self-center">
+            <img class="w-20 max-sm:w-12" :src="require('@/img/step3.svg')" />
+            <span class="max-sm:text-2xl text-4xl ml-3 font-bold self-center">
                 GPU
             </span>
         </div>
@@ -86,7 +86,7 @@
         <div class="flex max-lg:flex-col justify-left content-center p-3">
             <!-- GPU 단위 조정 -->
             <div class="w-1/2 m-2 max-lg:w-full">
-                <div class="text-lg">
+                <div class="sm:text-lg">
                     GPU 개수 조정
                 </div>
 
@@ -96,7 +96,7 @@
 
             <!-- GPU 제조사 선택 -->
             <div class="w-1/2 m-2 max-lg:w-full">
-                <div class="text-lg">
+                <div class="sm:text-lg">
                     제조사
                 </div>
 
@@ -107,8 +107,8 @@
 
         <!-- 4. Storage -->
         <div class="flex justify-left content-center">
-            <img class="w-20" :src="require('@/img/step4.svg')" />
-            <span class="text-4xl ml-3 font-bold self-center">
+            <img class="w-20 max-sm:w-12" :src="require('@/img/step4.svg')" />
+            <span class="max-sm:text-2xl text-4xl ml-3 font-bold self-center">
                 Storage
             </span>
         </div>
@@ -116,7 +116,7 @@
         <div class="flex max-lg:flex-col justify-left content-center p-3">
             <!-- 스토리지 용량 선택 -->
             <div class="w-1/2 m-2 max-lg:w-full">
-                <div class="text-lg">
+                <div class="sm:text-lg">
                     용량
                 </div>
 
@@ -126,7 +126,7 @@
 
             <!-- 스토리지 개수 선택 -->
             <div class="w-1/2 m-2 max-lg:w-full">
-                <div class="text-lg">
+                <div class="sm:text-lg">
                     개수
                 </div>
 
@@ -135,8 +135,8 @@
             </div>
         </div>
 
-        <button class="bg-[#00BF9E] hover:bg-[#12B79A] rounded-full px-36 py-4 flex m-auto my-5">
-            <span class="text-white font-semibold text-3xl">
+        <button class="bg-[#00BF9E] hover:bg-[#12B79A] rounded-full max-md:px-32 md:px-36 py-4 flex m-auto my-4">
+            <span class="text-white font-semibold max-md:text-2xl md:text-3xl">
                 완료
             </span>
         </button>

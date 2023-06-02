@@ -9,15 +9,19 @@
         <a class="mr-5 text-gray-900 font-bold cursor-pointer">가격정책</a>
         <a class="mr-5 text-gray-900 font-bold cursor-pointer">도움말</a>
         <a class="mr-5 text-gray-900 font-bold cursor-pointer">고객지원</a>
+        <a class="text-gray-900 font-bold cursor-pointer"
+        @click="$router.push('/mypage')">마이페이지</a>
       </nav>
+      
       <div class="flex">
         <button @click="$router.push('/login')"
-          class="rounded-5 bg-white text-teal-700 border-2 border-[#0F6D74] mr-3 inline-flex items-center py-2.5 px-4 max-md:mt-4 md:mt-0">로그인</button>
+          class="rounded-5 bg-white-100 text-teal-700 border-2 border-[#0F6D74] mr-3 inline-flex items-center py-2.5 px-4 max-md:mt-4 md:mt-0 max-md:text-sm 
+          hover:bg-gray-100">로그인</button>
         <button @click="$router.push('/signup')"
         class="
         border-transparent bg-teal-700 text-white
         rounded-5
-        inline-flex items-center py-2.5 px-4 max-md:mt-4 md:mt-0 ">회원가입</button>
+        inline-flex items-center py-2.5 px-4 max-md:mt-4 md:mt-0 max-md:text-sm hover:bg-teal-800">회원가입</button>
       </div>
 
     </div>

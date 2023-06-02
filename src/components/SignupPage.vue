@@ -1,9 +1,9 @@
 <template>
-    <div class="relative container mx-auto px-5 lg:w-full">
+    <div class="relative container mx-auto lg:px-5 max-lg:px-3 lg:w-full">
         <TitleHeader></TitleHeader>
 
         <div class="w-1/3 max-2xl:w-1/2 max-xl:w-full flex flex-col text-center m-auto justify-center">
-            <div class="not-italic font-semibold m-0 text-teal-700 text-5xl m-5">
+            <div class="not-italic font-semibold m-0 text-teal-700 max-sm:text-4xl sm:text-5xl m-5">
                 <span>Sign Up</span>
             </div>
 
@@ -76,7 +76,7 @@
             </div>
 
             <!-- 약관 동의 1 (checkbox-1)-->
-            <div class="flex items-center justify-between mr-4 mb-1">
+            <div class="flex max-sm:flex-col max-sm:justify-start max-sm:items-start items-center justify-between mr-4 mb-1">
                 <div class="justify-self-start">
                     <input id="checkbox-1" type="checkbox" value=""
                         class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
@@ -86,13 +86,13 @@
                 </div>
 
 
-                <span class="cursor-pointer justify-self-end text-gray-300 underline">
+                <span class="max-sm:self-end cursor-pointer justify-self-end text-gray-300 underline">
                     상세보기
                 </span>
             </div>
 
             <!-- 약관 동의 2 (checkbox-2)-->
-            <div class="flex items-center justify-between mr-4 mb-1">
+            <div class="flex max-sm:flex-col max-sm:justify-start max-sm:items-start items-center justify-between mr-4 mb-1">
                 <div class="justify-self-start">
                     <input id="checkbox-2" type="checkbox" value=""
                         class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
@@ -102,13 +102,13 @@
                 </div>
 
 
-                <span class="cursor-pointer justify-self-end text-gray-300 underline">
+                <span class="max-sm:self-end cursor-pointer justify-self-end text-gray-300 underline">
                     상세보기
                 </span>
             </div>
 
             <!-- 약관 동의 3 (checkbox-3)-->
-            <div class="flex items-center justify-between mr-4 mb-1">
+            <div class="flex max-sm:flex-col max-sm:justify-start max-sm:items-start items-center justify-between mr-4 mb-1">
                 <div class="justify-self-start">
                     <input id="checkbox-3" type="checkbox" value=""
                         class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
@@ -118,7 +118,7 @@
                 </div>
 
 
-                <span class="cursor-pointer justify-self-end text-gray-300 underline">
+                <span class="max-sm:self-end cursor-pointer justify-self-end text-gray-300 underline">
                     상세보기
                 </span>
             </div>
@@ -126,7 +126,7 @@
             <div class="my-4 border-b-2 border-gray-100"></div>
 
             <div>
-                <button class="login-button">회원가입</button>
+                <button class="login-button max-md:text-xl">회원가입</button>
             </div>
         </div>
     </div>

@@ -1,24 +1,32 @@
 <template>
-  <div class="relative container mx-auto px-5 lg:w-9/12">
+  <div class="relative container mx-auto lg:px-5 lg:w-9/12 max-lg:px-0">
     <TitleHeader></TitleHeader>
 
+
     <!-- 소개 컨테이너 -->
-    <div class="flex flex-wrap justify-center items-center mt-5 mx-3">
+    <div class="flex flex-wrap justify-center items-center mt-5 mx-3"
+      data-aos="fade-up"
+      data-aos-duration="900"
+    data-aos-easing="ease"
+    data-aos-offset="10"
+    data-aos-delay="50"
+    data-aos-anchor-placement="top-center">
       <!-- 소개 텍스트 (왼쪽) -->
-      <div class="md:w-1/2">
-        <div class="not-italic font-bold max-md:text-2xl md:text-3xl xl:text-6xl text-gray-800">
+      <div class="md:w-1/2 max-md:w-full">
+        <div class="not-italic font-bold max-md:text-4xl md:text-3xl xl:text-6xl text-gray-800">
           클라우드 컴퓨팅의
           <br />
           혁신적인 미래
         </div>
-        <div class="not-italic font-bold text-xl ml-1 my-2 text-teal-700 leading-10">
+        <div class="not-italic font-bold text-xl ml-1 max-md:ml-0 md:my-2 text-teal-700 leading-10">
           컴퓨팅 요구 사항을 위한 최고의 솔루션
         </div>
 
         <div>
           <button
             class="hover:bg-teal-800
-            border-transparent bg-teal-700 text-white font-light flex justify-center items-center rounded-5 px-4 py-2.5">
+            border-transparent bg-teal-700 text-white font-light flex justify-center items-center rounded-5 px-4 py-2.5
+            max-md:text-sm">
             <span>
               시작하기 &nbsp;
             </span>
@@ -33,28 +41,34 @@
       </div>
 
       <!-- 소개 이미지 (오른쪽) -->
-      <img class="md:w-1/2" style="width: 50%; height: 100%;" :src="require('../img/main_top_image.svg')" />
+      <img class="md:w-1/2 max-md:w-full max-md:mt-0" style="height: 100%;" :src="require('../img/main_top_image.svg')" />
     </div>
 
     <!-- 장점 컨테이너 -->
-    <div class="flex justify-between my-32 max-md:flex-col">
+    <div class="flex justify-between my-32 max-md:my-14 max-md:flex-col"
+      data-aos="fade-up"
+      data-aos-duration="900"
+    data-aos-easing="ease"
+    data-aos-offset="-300"
+    data-aos-delay="50"
+    data-aos-anchor-placement="top-center">
       <div class="flex items-start sub-introduce-container-box md:w-1/3 m-2">
         <span class="shine"></span>
-        <div class="font-bold text-gray-800 max-md:text-xl md:text-base lg:text-xl xl:text-3xl mb-3 ">목적에 따라 <br /> 다양한 플랜
+        <div class="font-bold text-gray-800 max-md:text-2xl md:text-xl lg:text-xl xl:text-3xl mb-3 ">목적에 따라 <br /> 다양한 플랜
           제공</div>
         <img class="self-end max-md:mb-5 md:m-1" style="width: 65%;" :src="require('../img/introduce1_img.svg')" />
       </div>
 
       <div class="flex items-start sub-introduce-container-box md:w-1/3 m-2">
         <span class="shine"></span>
-        <div class="font-bold text-gray-800 max-md:text-xl md:text-base lg:text-xl xl:text-3xl mb-3">원하는 사양의 <br /> 컴퓨터
+        <div class="font-bold text-gray-800 max-md:text-2xl md:text-xl lg:text-xl xl:text-3xl mb-3">원하는 사양의 <br /> 컴퓨터
           구성을 빠르게</div>
         <img class="self-end max-md:mb-5 md:m-3" style="width: 65%;" :src="require('../img/introduce2_img.svg')" />
       </div>
 
       <div class="flex items-start sub-introduce-container-box md:w-1/3 m-2">
         <span class="shine"></span>
-        <div class="font-bold text-gray-800 max-md:text-xl md:text-base lg:text-xl xl:text-3xl mb-3">언제 어디서나 <br /> 클라우드
+        <div class="font-bold text-gray-800 max-md:text-2xl md:text-xl lg:text-xl xl:text-3xl mb-3">언제 어디서나 <br /> 클라우드
           노트북 접속</div>
         <img class="self-end max-md:mb-5 md:m-3" style="width: 65%;" :src="require('../img/introduce3_img.svg')" />
       </div>
@@ -63,12 +77,24 @@
 
   <div class="w-full">
     <!-- 서비스 Title -->
-    <div class="not-italic font-bold text-center text-gray-800 max-md:text-2xl md:text-4xl lg:text-5xl">
+    <div class="not-italic font-bold text-center text-gray-800 max-sm:text-2xl max-md:text-3xl md:text-4xl lg:text-5xl"
+      data-aos="fade-up"
+      data-aos-duration="900"
+    data-aos-easing="ease"
+    data-aos-offset="-250"
+    data-aos-delay="50"
+    data-aos-anchor-placement="top-center">
       Blueberry를 통해 쉽고 빠르게 <br /> 클라우드 환경을 구축하세요
     </div>
 
     <!-- 서비스 컨테이너 : 캐러셀 UI -->
-    <div class="w-full overflow-x-hidden m-auto p-12 flex content-center justify-center relative">
+    <div class="w-full overflow-x-hidden m-auto p-12 flex content-center justify-center relative"
+      data-aos="fade-up"
+      data-aos-duration="900"
+    data-aos-easing="ease"
+    data-aos-offset="-250"
+    data-aos-delay="50"
+    data-aos-anchor-placement="top-center">
       <!-- 캐러셀 네비게이션 버튼 -->
       <img v-if="carouselIndex != -1" :src="require('../img/carousel_prev.svg')"
         class="service-container-carousel-button max-lg:left-[3%] lg:left-[10%] max-md:w-14" @click="prev" />
@@ -117,10 +143,14 @@
       </div>
     </div>
   </div>
+
+  <img class="login-wave static" :src="require('../img/wave.svg')" />
 </template>
 
 <script>
 import TitleHeader from './TitleHeader.vue';
+import AOS from 'aos';
+import "aos/dist/aos.css";
 
 export default {
   name: 'MainPage',
@@ -189,6 +219,9 @@ export default {
   //   Slide,
   //   Navigation,
   // },
+  created() {
+    AOS.init();
+  },  
   props: {
 
   },

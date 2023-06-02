@@ -1,9 +1,9 @@
 <template>
-    <div class="relative container mx-auto px-5 lg:w-9/12">
+    <div class="relative container mx-auto px-3 lg:w-9/12">
         <TitleHeader></TitleHeader>
 
         <div class="flex sm:w-1/2 md:w-1/2 lg:w-4/12 xl:w-3/12 flex-col text-center m-auto">
-            <div class="not-italic font-semibold m-0 text-teal-700 text-5xl m-5">
+            <div class="not-italic font-semibold m-0 text-teal-700 md:text-5xl max-md:text-4xl m-5">
                 <span>Login</span>
             </div>
 
@@ -26,7 +26,8 @@
                 <span class="text-gray-400">
                     계정이 없으신가요?
                 </span>
-                <span class="font-medium not-italic text-teal-700 underline">
+                <span @click="$router.push('/signup')"
+                class="font-medium not-italic text-teal-700 underline">
                     회원가입
                 </span>
             </div>
@@ -37,7 +38,7 @@
         </div>
     </div>
 
-    <img class="login-wave"
+    <img class="login-wave max-[400px]:static"
     :src="require('../img/wave.svg')"/>
 </template>
   
