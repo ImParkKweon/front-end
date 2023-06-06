@@ -6,7 +6,7 @@
             class="w-full text-black bg-white hover:bg-gray-200 focus:outline-none 
                     border-2 border-teal-700 font-medium rounded-lg text-sm px-4 py-3 text-center inline-flex items-center my-2 flex justify-between" type="button">
             <span class="self-center text-center">
-                {{ base }}
+                {{ baseContent }}
             </span>
             <svg class="self-end w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg">
@@ -15,12 +15,13 @@
         </button>
         <!-- Dropdown menu -->
         <div :id="base"
-            class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-72 lg:w-96 dark:bg-gray-700">
+            class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-72 lg:w-96 dark:bg-gray-700 cursor-pointer" data-aos="fade-up" data-aos-duration="900"
+      data-aos-easing="ease" data-aos-offset="10" data-aos-delay="50" data-aos-anchor-placement="top-center">
             <ul class="py-2 text-base text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
                 <li v-for="i in content" :key="i">
-                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                    <div @click="changeBaseContent(i)" href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                         {{ i }}
-                    </a>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -28,33 +29,27 @@
 </template>
   
 <script>
+import AOS from 'aos';
+import "aos/dist/aos.css";
 
 export default {
     name: 'SubscribePage',
     data() {
         return {
+            baseContent: this.base,
         }
     },
     methods: {
-        async toggleDropdown() {
-            const dropdownList = await document.getElementById(this.base);
-            await dropdownList.classList.toggle("hidden");
-            await dropdownList.classList.toggle("absolute");
-
-            // $(document).click(function () {
-            //     $('#drop').hide();
-            // });
+        toggleDropdown() {
+            const dropdownList = document.getElementById(this.base);
+            dropdownList.classList.toggle("hidden");
+            dropdownList.classList.toggle("absolute");
         },
-        // documentClick(e) {
-        //     let dropID = 'dropdownMenu-' + this.base;
-        //     let el = this.$refs[dropID];
-        //     let target = e.target;
-        //     console.log(el);
-        //     console.log(e.target);
-        //     if ((el !== target) && !el.contains(target)) {
-        //         this.toggleDropdown();
-        //     }
-        // }
+        changeBaseContent(data) {
+            this.baseContent = data; 
+            this.toggleDropdown();
+            this.$emit('setDropdownData', this.category, data);
+        },
     },
     mounted() {
         console.log(this.content);
@@ -62,14 +57,12 @@ export default {
     props: {
         base: String,
         content: Array,
+        category: String,
+    },
+    components: {
     },
     created() {
-        // document.addEventListener('click', this.documentClick);
-    },
-    // unmounted() {
-    //     document.removeEventListener('click', this.documentClick);
-    // },
-    components: {
+        AOS.init();
     },
 }
 </script>

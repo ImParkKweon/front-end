@@ -34,7 +34,8 @@
                 peer-checked:ring ring-teal-700 ring-offset-4 cursor-pointer">
                 <img class="m-auto w-20" :src="require('@/img/' + a.file)" />
                 <div class="text-center">
-                    <div class="text-3xl mt-4 font-bold">
+                    <div class="text-3xl mt-4 font-bold"
+                    @click="selectedService.os = a.name">
                         {{ a.name }}
                     </div>
                     <div class="mt-3">
@@ -61,7 +62,9 @@
                 </div>
 
                 <Dropdown :base="dropdown.cpu.base"
-                :content="dropdown.cpu.content"/>
+                :content="dropdown.cpu.content"
+                :category="'cpu'"
+                @setDropdownData="setDropdownData"/>
             </div>
 
             <!-- RAM 단위 조정 -->
@@ -71,7 +74,9 @@
                 </div>
 
                 <Dropdown :base="dropdown.ram.base"
-                :content="dropdown.ram.content"/>
+                :content="dropdown.ram.content"
+                :category="'ram'"
+                @setDropdownData="setDropdownData"/>
             </div>
         </div>
 
@@ -91,7 +96,9 @@
                 </div>
 
                 <Dropdown :base="dropdown.gpu.base"
-                :content="dropdown.gpu.content"/>
+                :content="dropdown.gpu.content"
+                :category="'gpu'"
+                @setDropdownData="setDropdownData"/>
             </div>
 
             <!-- GPU 제조사 선택 -->
@@ -101,7 +108,9 @@
                 </div>
 
                 <Dropdown :base="dropdown.gpuCompany.base"
-                :content="dropdown.gpuCompany.content"/>
+                :content="dropdown.gpuCompany.content"
+                :category="'gpuCompany'"
+                @setDropdownData="setDropdownData"/>
             </div>
         </div>
 
@@ -121,7 +130,9 @@
                 </div>
 
                 <Dropdown :base="dropdown.volume.base"
-                :content="dropdown.volume.content"/>
+                :content="dropdown.volume.content"
+                :category="'volume'"
+                @setDropdownData="setDropdownData"/>
             </div>
 
             <!-- 스토리지 개수 선택 -->
@@ -131,7 +142,9 @@
                 </div>
 
                 <Dropdown :base="dropdown.volumeCount.base"
-                :content="dropdown.volumeCount.content"/>
+                :content="dropdown.volumeCount.content"
+                :category="'volumeCount'"
+                @setDropdownData="setDropdownData"/>
             </div>
         </div>
 
@@ -172,32 +185,52 @@ export default {
             dropdown: {
                 "cpu": {
                     "base": "CPU 단위를 조정해주세요.",
-                    "content": ["cpu1", "cpu2", "cpu3"]
+                    "content": ["cpu1", "cpu2", "cpu3"],
+                    "selected": null,
                 },
                 "ram": {
                     "base": "RAM 단위를 조정해주세요.",
-                    "content": ["ram1", "ram2", "ram3"]
+                    "content": ["ram1", "ram2", "ram3"],
+                    "selected": null,
                 },
                 "gpu": {
                     "base": "GPU 개수를 조정해주세요.",
-                    "content": ["gpu1", "gpu2", "gpu3"]
+                    "content": ["gpu1", "gpu2", "gpu3"],
+                    "selected": null,
                 },
                 "gpuCompany": {
                     "base": "GPU 제조사를 선택해주세요.",
-                    "content": ["NVIDIA", "AMD"]
+                    "content": ["NVIDIA", "AMD"],
+                    "selected": null,
                 },
                 "volume": {
                     "base": "스토리지 용량을 선택해주세요.",
-                    "content": ["256GB", "512GB", "1TB", "2TB"]
+                    "content": ["256GB", "512GB", "1TB", "2TB"],
+                    "selected": null,
                 },
                 "volumeCount": {
                     "base": "스토리지 개수를 선택해주세요.",
-                    "content": ["1개", "2개", "3개"]
+                    "content": ["1개", "2개", "3개"],
+                    "selected": null,
                 }
+            },
+            selectedService: {
+                "os": "",
+                "cpu": "",
+                "ram": "",
+                "gpu": "",
+                "gpuCompany": "",
+                "volume": "",
+                "volumeCount": ""
             }
         }
     },
     methods: {
+        // dropdown 컴포넌트에서 선택한 데이터를 저장함
+        setDropdownData(category, data) {
+            this.selectedService[category] = data;
+            console.log(this.selectedService[category]);
+        }
     },
     created() {
         // this.$router.go(0);

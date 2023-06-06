@@ -13,7 +13,6 @@ export default {
 
 <style>
 @import url(https://fonts.googleapis.com/earlyaccess/notosanskr.css);
-
 #app {
   font-family: 'Noto Sans KR';
   -webkit-font-smoothing: antialiased;
@@ -24,5 +23,10 @@ export default {
   -khtml-user-select: none;
   -webkit-user-select: none;
   user-select: none;
+  scroll-behavior: smooth;
+}
+
+html {
+  /* scroll-behavior: smooth; */
 }
 </style>

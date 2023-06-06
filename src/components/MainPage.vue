@@ -1,16 +1,10 @@
 <template>
+  <TitleHeader></TitleHeader>
   <div class="relative container mx-auto lg:px-5 lg:w-9/12 max-lg:px-0">
-    <TitleHeader></TitleHeader>
-
 
     <!-- 소개 컨테이너 -->
-    <div class="flex flex-wrap justify-center items-center mt-5 mx-3"
-      data-aos="fade-up"
-      data-aos-duration="900"
-    data-aos-easing="ease"
-    data-aos-offset="10"
-    data-aos-delay="50"
-    data-aos-anchor-placement="top-center">
+    <div class="flex flex-wrap justify-center items-center mt-5 mx-3" data-aos="fade-up" data-aos-duration="900"
+      data-aos-easing="ease" data-aos-offset="10" data-aos-delay="50" data-aos-anchor-placement="top-center">
       <!-- 소개 텍스트 (왼쪽) -->
       <div class="md:w-1/2 max-md:w-full">
         <div class="not-italic font-bold max-md:text-4xl md:text-3xl xl:text-6xl text-gray-800">
@@ -23,8 +17,7 @@
         </div>
 
         <div>
-          <button
-            class="hover:bg-teal-800
+          <button class="hover:bg-teal-800
             border-transparent bg-teal-700 text-white font-light flex justify-center items-center rounded-5 px-4 py-2.5
             max-md:text-sm">
             <span>
@@ -45,13 +38,8 @@
     </div>
 
     <!-- 장점 컨테이너 -->
-    <div class="flex justify-between my-32 max-md:my-14 max-md:flex-col"
-      data-aos="fade-up"
-      data-aos-duration="900"
-    data-aos-easing="ease"
-    data-aos-offset="-300"
-    data-aos-delay="50"
-    data-aos-anchor-placement="top-center">
+    <div class="flex justify-between my-32 max-md:my-14 max-md:flex-col" data-aos="fade-up" data-aos-duration="900"
+      data-aos-easing="ease" data-aos-offset="-300" data-aos-delay="50" data-aos-anchor-placement="top-center">
       <div class="flex items-start sub-introduce-container-box md:w-1/3 m-2">
         <span class="shine"></span>
         <div class="font-bold text-gray-800 max-md:text-2xl md:text-xl lg:text-xl xl:text-3xl mb-3 ">목적에 따라 <br /> 다양한 플랜
@@ -78,23 +66,15 @@
   <div class="w-full">
     <!-- 서비스 Title -->
     <div class="not-italic font-bold text-center text-gray-800 max-sm:text-2xl max-md:text-3xl md:text-4xl lg:text-5xl"
-      data-aos="fade-up"
-      data-aos-duration="900"
-    data-aos-easing="ease"
-    data-aos-offset="-250"
-    data-aos-delay="50"
-    data-aos-anchor-placement="top-center">
+      data-aos="fade-up" data-aos-duration="900" data-aos-easing="ease" data-aos-offset="-250" data-aos-delay="50"
+      data-aos-anchor-placement="top-center">
       Blueberry를 통해 쉽고 빠르게 <br /> 클라우드 환경을 구축하세요
     </div>
 
     <!-- 서비스 컨테이너 : 캐러셀 UI -->
-    <div class="w-full overflow-x-hidden m-auto p-12 flex content-center justify-center relative"
-      data-aos="fade-up"
-      data-aos-duration="900"
-    data-aos-easing="ease"
-    data-aos-offset="-250"
-    data-aos-delay="50"
-    data-aos-anchor-placement="top-center">
+    <div class="w-full overflow-x-hidden m-auto p-12 flex content-center justify-center relative" data-aos="fade-up"
+      data-aos-duration="900" data-aos-easing="ease" data-aos-offset="-250" data-aos-delay="50"
+      data-aos-anchor-placement="top-center">
       <!-- 캐러셀 네비게이션 버튼 -->
       <img v-if="carouselIndex != -1" :src="require('../img/carousel_prev.svg')"
         class="service-container-carousel-button max-lg:left-[3%] lg:left-[10%] max-md:w-14" @click="prev" />
@@ -103,8 +83,10 @@
 
       <!-- 캐러셀 -->
       <div ref="carousel" class="service-container-carousel-items lg:w-[200%]">
-        <div v-for="i in plan" :key="i" class="max-md:m-0 md:m-3 lg:m-10 service-container-carousel-item max-md:w-screen max-md:max-h-[700px] max-xl:max-h-[630px] xl:max-h-[700px]">
-          <img class="w-7/12 sm:max-w-[450px] max-sm:w-full m-auto my-5 mb-4" :src="require('../img/' + i.src + '.svg')" />
+        <div v-for="i in plan" :key="i"
+          class="max-md:m-0 md:m-3 lg:m-10 service-container-carousel-item max-md:w-screen max-md:max-h-[700px] max-xl:max-h-[630px] xl:max-h-[700px]">
+          <img class="w-7/12 sm:max-w-[450px] max-sm:w-full m-auto my-5 mb-4"
+            :src="require('../img/' + i.src + '.svg')" />
           <!-- 서비스 이름 -->
           <div class="text-5xl max-2xl:text-3xl font-bold text-center">
             {{ i.name }}
@@ -131,14 +113,13 @@
           <!-- 간단하게 설명된 사양 -->
           <div class="my-5 m-auto flex max-lg:flex-col max-lg:my-0">
             <div class="flex items-center content-center justify-center" v-for="j in i.spec" :key="j">
-              <img class="w-7"
-              :src="require('../img/check_circle.svg')"/>
+              <img class="w-7" :src="require('../img/check_circle.svg')" />
               <span class="text-xl ml-5 mr-7 max-lg:my-2">
                 {{ j }}
               </span>
             </div>
           </div>
-          
+
         </div>
       </div>
     </div>
@@ -221,7 +202,7 @@ export default {
   // },
   created() {
     AOS.init();
-  },  
+  },
   props: {
 
   },
@@ -231,4 +212,6 @@ export default {
 }
 </script>
 
-<style>@import '../css/MainPage.css';</style>
+<style>
+@import '../css/MainPage.css';
+</style>
