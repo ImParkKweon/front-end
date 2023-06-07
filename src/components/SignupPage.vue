@@ -1,6 +1,6 @@
 <template>
     <TitleHeader></TitleHeader>
-    <div class="container mx-auto lg:px-5 lg:w-9/12 max-lg:px-0">
+    <div class="container mx-auto lg:px-5 lg:w-9/12 max-lg:px-4">
 
         <div class="w-1/3 max-2xl:w-1/2 max-xl:w-full flex flex-col text-center m-auto justify-center"
             data-aos="fade-zoom-in" data-aos-easing="ease-in-out" data-aos-offset="0">

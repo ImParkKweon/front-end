@@ -8,22 +8,28 @@ import MyPage from './components/MyPage.vue';
 const routes = [
   {
     path: "/",
+    name: "MainPage",
     component: MainPage,
   },
   {
     path: "/login",
+    name: "LoginPage",
     component: LoginPage,
   },
   {
-    path: "/subscribe",
+    path: "/subscribe/:plan_num",
+    name: "SubscribePage",
     component: SubscribePage,
+    props: true,
   },
   {
     path: "/signup",
+    name: "SignupPage",
     component: SignupPage,
   },
   {
     path: "/mypage",
+    name: "MyPage",
     component: MyPage,
   }
 ];

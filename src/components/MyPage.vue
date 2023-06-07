@@ -1,6 +1,7 @@
 <template>
-    <div class="relative container mx-auto lg:px-5 lg:w-9/12 max-lg:px-2">
-        <TitleHeader></TitleHeader>
+    <TitleHeader></TitleHeader>
+    <div class="relative container mx-auto lg:px-5 lg:w-9/12 max-lg:px-2" data-aos="fade-zoom-in"
+            data-aos-easing="ease-in-out" data-aos-offset="0">
 
         <div class="my-4">
             <span class="text-4xl font-semibold p-2">마이페이지</span>

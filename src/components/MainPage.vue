@@ -83,21 +83,21 @@
 
       <!-- 캐러셀 -->
       <div ref="carousel" class="service-container-carousel-items lg:w-[200%]">
-        <div v-for="i in plan" :key="i"
+        <div v-for="(a, i) in plan" :key="i"
           class="max-md:m-0 md:m-3 lg:m-10 service-container-carousel-item max-md:w-screen max-md:max-h-[700px] max-xl:max-h-[630px] xl:max-h-[700px]">
           <img class="w-7/12 sm:max-w-[450px] max-sm:w-full m-auto my-5 mb-4"
-            :src="require('../img/' + i.src + '.svg')" />
+            :src="require('../img/' + a.src + '.svg')" />
           <!-- 서비스 이름 -->
           <div class="text-5xl max-2xl:text-3xl font-bold text-center">
-            {{ i.name }}
+            {{ a.name }}
           </div>
 
           <!-- 서비스 설명 -->
           <div class="text-2xl max-lg:text-xl text-center my-3">
-            {{ i.comment }}
+            {{ a.comment }}
           </div>
 
-          <button @click="$router.push('/subscribe');"
+          <button @click="toSubscribePage(i)"
             class="hover:bg-teal-800
             border-transparent bg-teal-700 text-white font-light flex justify-center items-center rounded-5 px-4 py-2.5 w-1/6 min-w-[150px] m-auto">
             <span>
@@ -112,7 +112,7 @@
 
           <!-- 간단하게 설명된 사양 -->
           <div class="my-5 m-auto flex max-lg:flex-col max-lg:my-0">
-            <div class="flex items-center content-center justify-center" v-for="j in i.spec" :key="j">
+            <div class="flex items-center content-center justify-center" v-for="j in a.spec" :key="j">
               <img class="w-7" :src="require('../img/check_circle.svg')" />
               <span class="text-xl ml-5 mr-7 max-lg:my-2">
                 {{ j }}
@@ -133,43 +133,22 @@ import TitleHeader from './TitleHeader.vue';
 import AOS from 'aos';
 import "aos/dist/aos.css";
 
+// Vuex
+import { computed } from "vue";
+import { useStore } from "vuex";
+
 export default {
   name: 'MainPage',
+  // Composition API
+  setup() {
+    const store = useStore();
+    const plan = computed(() => store.state.plan);
+
+    return { plan }
+  },
   data() {
     return {
       carouselIndex: 0,
-      plan: [
-        {
-          "src": 'designer_plan_img',
-          "name": "디자이너인 당신을 위해",
-          "comment": "디자인 환경에 적합한 클라우드 노트북 서비스",
-          "spec": [
-            "GPU 대박 1",
-            "스토리지 짱큼 1",
-            "예쁜 Mac OS 1"
-          ]
-        },
-        {
-          "src": 'developer_plan_img',
-          "name": "AI 개발 환경이 필요하신가요?",
-          "comment": "AI 개발 환경을 위한 클라우드 노트북 서비스",
-          "spec": [
-            "GPU 대박 2",
-            "스토리지 짱큼 2",
-            "예쁜 Mac OS 2"
-          ]
-        },
-        {
-          "src": '3Ddesigner_plan_img',
-          "name": "3D 그래픽 어쩌구저쩌구",
-          "comment": "높은 그래픽 사양의 클라우드 노트북 서비스",
-          "spec": [
-            "GPU 대박 3",
-            "스토리지 짱큼 3",
-            "예쁜 Mac OS 3"
-          ]
-        }
-      ]
     }
   },
   methods: {
@@ -191,6 +170,15 @@ export default {
 
       this.$refs.carousel.style.transform = `translate3d(${-size * this.carouselIndex}px, 0, 0)`;
     },
+    toSubscribePage(i) {
+      console.log(i);
+      this.$router.push({
+        name: "SubscribePage",
+        params: {
+          plan_num: i,
+        }
+      });
+    }
   },
   mounted() {
     // this.next();
