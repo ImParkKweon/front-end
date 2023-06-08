@@ -1,8 +1,8 @@
 <template>
     <!-- Dropdown container -->
     <!-- :data-dropdown-toggle="base" -->
-    <div :ref="'dropdownMenu-' + base" @click="documentClick">
-        <button id="dropdownDefaultButton" @click="toggleDropdown"
+    <div :ref="'dropdownMenu-' + base">
+        <button id="dropdownDefaultButton" :data-dropdown-toggle="base"
             class="w-full text-black bg-white hover:bg-gray-200 focus:outline-none 
                     border-2 border-teal-700 font-medium rounded-lg text-sm px-4 py-3 text-center inline-flex items-center my-2 flex justify-between" type="button">
             <span class="self-center text-center">
@@ -15,8 +15,7 @@
         </button>
         <!-- Dropdown menu -->
         <div :id="base"
-            class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-72 lg:w-96 dark:bg-gray-700 cursor-pointer" data-aos="fade-up" data-aos-duration="900"
-      data-aos-easing="ease" data-aos-offset="10" data-aos-delay="50" data-aos-anchor-placement="top-center">
+            class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-72 lg:w-96 dark:bg-gray-700 cursor-pointer">
             <ul class="py-2 text-base text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
                 <li v-for="i in content" :key="i">
                     <div @click="changeBaseContent(i)" href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
@@ -43,7 +42,7 @@ export default {
         toggleDropdown() {
             const dropdownList = document.getElementById(this.base);
             dropdownList.classList.toggle("hidden");
-            dropdownList.classList.toggle("absolute");
+            // dropdownList.classList.toggle("absolute");
         },
         changeBaseContent(data) {
             this.baseContent = data; 

@@ -1,6 +1,7 @@
 <template>
     <TitleHeader></TitleHeader>
-    <div class="relative container mx-auto lg:px-5 lg:w-9/12 max-lg:px-3">
+    
+    <div class="relative container mx-auto lg:px-5 lg:w-9/12 max-lg:px-3 lg:my-16">
         <div class="text-center md:text-5xl max-md:text-4xl max-sm:text-2xl font-bold max-md:m-2 md:m-5 mb-3 mt-4">
             클라우드 노트북의 사양을 <br />
             취향껏 커스터마이징하세요
@@ -9,17 +10,17 @@
             다양한 서비스에 맞춰 클라우드 노트북의 기본 사양을 제공합니다.
         </div>
 
-        <div class="special-gradient special-shadow flex max-md:flex-col rounded-5 sm:p-12 max-sm:p-8 w-8/12 max-2xl:w-full justify-between items-center max-sm:items-start m-auto">
+        <div
+            class="special-gradient special-shadow flex max-md:flex-col rounded-5 sm:p-12 max-sm:p-8 w-8/12 max-2xl:w-full justify-between items-center max-sm:items-start m-auto mb-5">
             <div class="flex flex-col content-center">
                 <!-- 선택한 플랜 제목 -->
-                <div class="font-semibold max-lg:text-4xl lg:text-4xl">
+                <div class="font-semibold max-lg:text-2xl lg:text-4xl">
                     {{ plan[$route.params.plan_num].name }}
                 </div>
 
                 <!-- 선택한 플랜 특징 -->
                 <div class="p-2">
-                    <div class="flex items-center mr-4 mt-4 mb-3" 
-                    v-for="i in plan[$route.params.plan_num].spec" :key="i">
+                    <div class="flex items-center mr-4 mt-4 mb-3" v-for="i in plan[$route.params.plan_num].spec" :key="i">
                         <input id="allCheck" type="checkbox" value="checkbox-1" disabled checked
                             class="w-6 h-6 checked:bg-[#00BF9E] border-none rounded">
                         <label for="allCheck" class="ml-2 font-light text-lg text-gray-900 dark:text-gray-300">
@@ -52,12 +53,12 @@
             <div class="lg:mr-4" v-for="(a, i) in osOption" :key="i">
                 <input type="radio" :id="'react-option-' + i" name="os-type" :value="'react-option-' + i"
                     class="hidden peer">
-                <label :for="'react-option-' + i" class="w-full p-5 max-lg:mt-3 rounded-4 border-2 border-gray-200 
+                <label @click="selectedService.os = a.name" :for="'react-option-' + i" class="w-full p-5 max-lg:mt-3 rounded-4 border-2 border-gray-200 
                 hover:ring ring-1-600 ring-offset-4 cursor-pointer cursor-pointer
                 peer-checked:ring ring-teal-700 ring-offset-4 cursor-pointer">
                     <img class="m-auto w-20" :src="require('@/img/' + a.file)" />
                     <div class="text-center">
-                        <div class="text-3xl mt-4 font-bold" @click="selectedService.os = a.name">
+                        <div class="text-3xl mt-4 font-bold">
                             {{ a.name }}
                         </div>
                         <div class="mt-3">
@@ -80,7 +81,7 @@
             <!-- CPU 단위 조정 -->
             <div class="w-1/2 m-2 max-lg:w-full">
                 <div class="sm:text-lg">
-                    CPU 단위 조정
+                    vCPU 단위 조정 (개)
                 </div>
 
                 <Dropdown :base="dropdown.cpu.base" :content="dropdown.cpu.content" :category="'cpu'"
@@ -90,7 +91,7 @@
             <!-- RAM 단위 조정 -->
             <div class="w-1/2 m-2 max-lg:w-full">
                 <div class="sm:text-lg">
-                    RAM 단위 조정
+                    RAM 단위 조정 (GB)
                 </div>
 
                 <Dropdown :base="dropdown.ram.base" :content="dropdown.ram.content" :category="'ram'"
@@ -140,11 +141,27 @@
             <!-- 스토리지 용량 선택 -->
             <div class="w-1/2 m-2 max-lg:w-full">
                 <div class="sm:text-lg">
-                    용량
+                    용량 (GB)
                 </div>
 
-                <Dropdown :base="dropdown.volume.base" :content="dropdown.volume.content" :category="'volume'"
-                    @setDropdownData="setDropdownData" />
+                <!-- <Dropdown :base="dropdown.volume.base" :content="dropdown.volume.content" :category="'volume'"
+                    @setDropdownData="setDropdownData" /> -->
+                <div class="my-1">
+                    <div class="flex justify-between items-center">
+                        <span>1</span>
+                        <div
+                    class="px-3 py-2 text-sm font-semibold text-white bg-teal-600 rounded-lg shadow-sm opacity-100 dark:bg-gray-700 m-auto">
+                        {{ selectedService.volume }} GB
+                    </div>
+                        <span>256</span>
+                    </div>
+                    
+                    <input
+                    id="large-range" type="range" v-model=selectedService.volume
+                        min="1" max="256"
+                        class="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer range-lg dark:bg-gray-700">
+                        <!-- {{ test }} -->
+                </div>
             </div>
 
             <!-- 스토리지 개수 선택 -->
@@ -158,7 +175,8 @@
             </div>
         </div>
 
-        <button class="bg-[#00BF9E] hover:bg-[#12B79A] rounded-full max-md:px-32 md:px-36 py-4 flex m-auto my-4">
+        <button @click="subscribe_select_complete"
+            class="bg-[#00BF9E] hover:bg-[#12B79A] rounded-full max-md:px-32 md:px-36 py-4 flex m-auto my-4">
             <span class="text-white font-semibold max-md:text-2xl md:text-3xl">
                 완료
             </span>
@@ -174,6 +192,7 @@ import Dropdown from './Dropdown.vue';
 // Vuex
 import { computed } from "vue";
 import { useStore } from "vuex";
+import { initFlowbite } from 'flowbite';
 
 export default {
     name: 'SubscribePage',
@@ -204,18 +223,18 @@ export default {
             ],
             dropdown: {
                 "cpu": {
-                    "base": "CPU 단위를 조정해주세요.",
-                    "content": ["cpu1", "cpu2", "cpu3"],
+                    "base": "vCPU 단위를 조정해주세요.",
+                    "content": ["1", "2", "4", "8"],
                     "selected": null,
                 },
                 "ram": {
                     "base": "RAM 단위를 조정해주세요.",
-                    "content": ["ram1", "ram2", "ram3"],
+                    "content": ["1GB", "2GB", "4GB", "8GB", "16GB", "32GB", "64GB"],
                     "selected": null,
                 },
                 "gpu": {
                     "base": "GPU 개수를 조정해주세요.",
-                    "content": ["gpu1", "gpu2", "gpu3"],
+                    "content": ["1", "2", "3"],
                     "selected": null,
                 },
                 "gpuCompany": {
@@ -229,8 +248,8 @@ export default {
                     "selected": null,
                 },
                 "volumeCount": {
-                    "base": "스토리지 개수를 선택해주세요.",
-                    "content": ["1개", "2개", "3개"],
+                    "base": "추가 스토리지 개수를 선택해주세요.",
+                    "content": ["1", "2"],
                     "selected": null,
                 }
             },
@@ -240,7 +259,7 @@ export default {
                 "ram": "",
                 "gpu": "",
                 "gpuCompany": "",
-                "volume": "",
+                "volume": 128,
                 "volumeCount": ""
             }
         }
@@ -250,9 +269,23 @@ export default {
         setDropdownData(category, data) {
             this.selectedService[category] = data;
             // console.log(this.selectedService[category]);
+        },
+        documentClick(e) {
+            // if (e.id == "dropdownDefaultButton") {
+            //     console.log(true);
+            // }
+            // else {
+            //     console.log(false);
+            // }
+            console.log(e);
+            // console.log(e.par);
+        },
+        subscribe_select_complete() {
+            console.log(this.selectedService);
         }
     },
     mounted() {
+        initFlowbite();
     },
     // components: {
     //   Carousel,
