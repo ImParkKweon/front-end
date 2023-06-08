@@ -8,37 +8,52 @@
                 <span>Login</span>
             </div>
 
+            <!-- 로그인 form -->
             <form class="login-input-form w-full">
                 <!-- tailwind form -->
                 <div class="relative">
-                    <input type="text" id="user-id" class="block px-4 pb-4 pt-4 w-full text-base text-gray-900 bg-transparent rounded-full border border-1 border-good-gray appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600
+                    <input v-model="userID"
+                    type="text" id="user-id" class="block px-4 pb-4 pt-4 w-full text-base text-gray-900 bg-transparent rounded-full border border-1 border-good-gray appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600
                     focus:shadow-md peer" placeholder=" " />
-                    <label for="floating_outlined"
+                    <label for="user-id"
                         class="absolute text-m text-gray-500/70 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-90 peer-focus:-translate-y-4 left-5">User
                         ID</label>
                 </div>
 
+                <div v-if="!userID_config"
+                class="text-red-600 font-light text-right text-sm m-1">
+                    아이디를 다시 확인해주세요.
+                </div>
+
                 <div class="relative">
-                    <input type="password" id="user-pw" class="block mt-2.5 mb-4 px-4 pb-4 pt-4 w-full text-base text-gray-900 bg-transparent rounded-full border border-1 border-good-gray appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600
+                    <input v-model="userPW"
+                    type="password" id="user-pw" class="block mt-2.5 mb-4 px-4 pb-4 pt-4 w-full text-base text-gray-900 bg-transparent rounded-full border border-1 border-good-gray appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600
                     focus:shadow-md peer" placeholder=" " />
-                    <label for="floating_outlined"
+                    <label for="user-pw"
                         class="absolute text-m text-gray-500/70 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-90 peer-focus:-translate-y-4 left-5">User
                         Password</label>
                 </div>
+
+                <div v-if="!userPW_config"
+                class="text-red-600 font-light text-right text-sm -mt-4 mb-4">
+                    비밀번호를 다시 확인해주세요.
+                </div>
+
+
+                <div>
+                    <span class="text-gray-400">
+                        계정이 없으신가요?
+                    </span>
+                    <span @click="$router.push('/signup')"
+                        class="hover:cursor-pointer font-medium not-italic text-teal-700 underline">
+                        회원가입
+                    </span>
+                </div>
+
+                <div @click="login_config"
+                class="cursor-pointer login-button">로그인</div>
             </form>
 
-            <div>
-                <span class="text-gray-400">
-                    계정이 없으신가요?
-                </span>
-                <span @click="$router.push('/signup')" class="font-medium not-italic text-teal-700 underline">
-                    회원가입
-                </span>
-            </div>
-
-            <div>
-                <button class="login-button">로그인</button>
-            </div>
         </div>
     </div>
 
@@ -52,10 +67,38 @@ export default {
     name: 'LoginPage',
     data() {
         return {
-
+            userID: null,
+            userPW: null,
+            userID_config: true,
+            userPW_config: true,
         }
     },
     methods: {
+        async login_config() {
+            // login 값 유효 검사
+            if(this.userID == null || this.userID == "") {
+                this.userID_config = false;
+            }
+            else {
+                this.userID_config = true;
+            }
+
+            if(this.userPW == null || this.userPW == "") {
+                this.userPW_config = false;
+            }
+            else {
+                this.userPW_config = true;
+            }
+
+            // login api 요청
+
+
+
+
+            if(this.userID_config && this.userPW_config) {
+                this.$router.push('/');
+            }
+        }
     },
     props: {
 

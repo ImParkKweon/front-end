@@ -70,7 +70,7 @@
             <!-- 모든 약관 동의 (allCheck) -->
             <div class="flex items-center mr-4 mt-4 mb-3">
                 <input id="allCheck" type="checkbox" value="checkbox-1"
-                    class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    class="cursor-pointer w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                     @click="allCheck">
                 <label for="allCheck" class="ml-2 font-medium text-gray-900 dark:text-gray-300">
                     모든 약관에 동의합니다.
@@ -82,9 +82,9 @@
                 class="flex max-sm:flex-col max-sm:justify-start max-sm:items-start items-center justify-between mr-4 mb-1">
                 <div class="justify-self-start">
                     <input :id="'checkbox-' + i" :value="'checkbox-' + i" name="checkbox" type="checkbox" 
-                        class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        class="cursor-pointer w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                     <label :for="'checkbox-' + i" class="ml-2 font-base text-gray-900 dark:text-gray-300">
-                        이용약관 및 개인정보 처리방침에 동의합니다.
+                        {{ i }}
                     </label>
                 </div>
 
