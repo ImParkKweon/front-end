@@ -1,6 +1,6 @@
 <template>
     <TitleHeader></TitleHeader>
-    
+
     <div class="relative container mx-auto lg:px-5 lg:w-9/12 max-lg:px-3 lg:my-16">
         <div class="text-center md:text-5xl max-md:text-4xl max-sm:text-2xl font-bold max-md:m-2 md:m-5 mb-3 mt-4">
             클라우드 노트북의 사양을 <br />
@@ -150,17 +150,15 @@
                     <div class="flex justify-between items-center">
                         <span>1</span>
                         <div
-                    class="px-3 py-2 text-sm font-semibold text-white bg-teal-600 rounded-lg shadow-sm opacity-100 dark:bg-gray-700 m-auto">
-                        {{ selectedService.volume }} GB
-                    </div>
+                            class="px-3 py-2 text-sm font-semibold text-white bg-teal-600 rounded-lg shadow-sm opacity-100 dark:bg-gray-700 m-auto">
+                            {{ selectedService.volume }} GB
+                        </div>
                         <span>256</span>
                     </div>
-                    
-                    <input
-                    id="large-range" type="range" v-model=selectedService.volume
-                        min="1" max="256"
+
+                    <input id="large-range" type="range" v-model=selectedService.volume min="1" max="256"
                         class="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer range-lg dark:bg-gray-700">
-                        <!-- {{ test }} -->
+                    <!-- {{ test }} -->
                 </div>
             </div>
 
@@ -175,6 +173,25 @@
             </div>
         </div>
 
+        <!-- 모든 사항을 선택해주세요. -->
+        <div v-if="allSelected == false"
+        id="toast-danger"
+            class="flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 m-auto"
+            role="alert">
+            <div
+                class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg dark:bg-red-800 dark:text-red-200">
+                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                        clip-rule="evenodd"></path>
+                </svg>
+                <span class="sr-only">Error icon</span>
+            </div>
+            <div class="ml-3 text-sm font-normal">모든 사항을 선택해주세요.</div>
+        </div>
+
+        <!-- 완료 버튼 -->
         <button @click="subscribe_select_complete"
             class="bg-[#00BF9E] hover:bg-[#12B79A] rounded-full max-md:px-32 md:px-36 py-4 flex m-auto my-4">
             <span class="text-white font-semibold max-md:text-2xl md:text-3xl">
@@ -254,14 +271,15 @@ export default {
                 }
             },
             selectedService: {
-                "os": "",
-                "cpu": "",
-                "ram": "",
-                "gpu": "",
-                "gpuCompany": "",
+                "os": null,
+                "cpu": null,
+                "ram": null,
+                "gpu": null,
+                "gpuCompany": null,
                 "volume": 128,
-                "volumeCount": ""
-            }
+                "volumeCount": null
+            },
+            allSelected: null,
         }
     },
     methods: {
@@ -270,19 +288,24 @@ export default {
             this.selectedService[category] = data;
             // console.log(this.selectedService[category]);
         },
-        documentClick(e) {
-            // if (e.id == "dropdownDefaultButton") {
-            //     console.log(true);
-            // }
-            // else {
-            //     console.log(false);
-            // }
-            console.log(e);
-            // console.log(e.par);
-        },
         subscribe_select_complete() {
             console.log(this.selectedService);
-        }
+            if(this.check_all_selected()) {
+                this.$router.push('/mypage');
+            }
+        },
+        check_all_selected() {
+            for (const key in this.selectedService) {
+                // console.log(key);
+                // console.log(value);
+                if(this.selectedService[key] == null) {
+                    this.allSelected = false;
+                    return false;
+                }
+            }
+
+            return true;
+        },
     },
     mounted() {
         initFlowbite();
