@@ -72,7 +72,7 @@
     </div>
 
     <!-- 서비스 컨테이너 : 캐러셀 UI -->
-    <div class="w-full overflow-x-hidden m-auto p-12 flex content-center justify-center relative" data-aos="fade-up"
+    <div class="w-full overflow-x-hidden m-auto p-8 flex content-center justify-center relative" data-aos="fade-up"
       data-aos-duration="900" data-aos-easing="ease" data-aos-offset="-250" data-aos-delay="50"
       data-aos-anchor-placement="top-center">
       <!-- 캐러셀 네비게이션 버튼 -->

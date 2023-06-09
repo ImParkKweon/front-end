@@ -11,7 +11,11 @@ export default createStore({
             "빠른 그래픽 처리 가능 GPU",
             "넉넉한 메모리 사양",
             "우수한 색 재현률 Mac OS"
-          ]
+          ],
+          // os, cpu, ram, gpu, gpuCompany, volume, volumeCount
+          "select": [0, 
+            0, 0, 0, 0, 
+            180, 0],
         },
         {
           "src": 'developer_plan_img',
@@ -21,7 +25,11 @@ export default createStore({
             "Multi-GPU 가능",
             "추가 스토리지 제공",
             "개발에 적합한 Linux"
-          ]
+          ],
+          // os, cpu, ram, gpu, gpuCompany, volume, volumeCount
+          "select": [0, 
+            0, 0, 0, 0, 
+            180, 0],
         },
         {
           "src": '3Ddesigner_plan_img',
@@ -31,8 +39,13 @@ export default createStore({
             "3D 작업을 위한 고성능 GPU 제공",
             "무거운 파일 커다란 스토리지",
             "3D 디스플레이에 적합한 Mac OS"
-          ]
+          ],
+          // os, cpu, ram, gpu, gpuCompany, volume, volumeCount
+          "select": [0, 
+            0, 0, 0, 0, 
+            180, 0],
         }
-      ]
+    ],
+    
   }
 })

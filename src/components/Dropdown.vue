@@ -5,7 +5,8 @@
         <button id="dropdownDefaultButton" :data-dropdown-toggle="base"
             class="w-full text-black bg-white hover:bg-gray-200 focus:outline-none 
                     border-2 border-teal-700 font-medium rounded-lg text-sm px-4 py-3 text-center inline-flex items-center my-2 flex justify-between" type="button">
-            <span class="self-center text-center">
+            <span
+            class="self-center text-center">
                 {{ baseContent }}
             </span>
             <svg class="self-end w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -51,12 +52,16 @@ export default {
         },
     },
     mounted() {
-        // console.log(this.content);
+        if(this.selected != null) {
+            this.change_base_content(this.content[this.selected]);
+            this.toggle_dropdown();
+        }
     },
     props: {
         base: String,
         content: Array,
         category: String,
+        selected: Number,
     },
     components: {
     },

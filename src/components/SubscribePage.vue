@@ -51,9 +51,9 @@
 
         <div class="flex max-lg:flex-col justify-center content-center my-3">
             <div class="lg:mr-4" v-for="(a, i) in osOption" :key="i">
-                <input type="radio" :id="'react-option-' + i" name="os-type" :value="'react-option-' + i"
+                <input type="radio" :id="'os-option-' + i" name="os-type" :value="'os-option-' + i"
                     class="hidden peer">
-                <label @click="selectedService.os = a.name" :for="'react-option-' + i" class="w-full p-5 max-lg:mt-3 rounded-4 border-2 border-gray-200 
+                <label @click="selectedService.os = a.name" :for="'os-option-' + i" class="w-full p-5 max-lg:mt-3 rounded-4 border-2 border-gray-200 
                 hover:ring ring-1-600 ring-offset-4 cursor-pointer cursor-pointer
                 peer-checked:ring ring-teal-700 ring-offset-4 cursor-pointer">
                     <img class="m-auto w-20" :src="require('@/img/' + a.file)" />
@@ -85,7 +85,7 @@
                 </div>
 
                 <Dropdown :base="dropdown.cpu.base" :content="dropdown.cpu.content" :category="'cpu'"
-                    @set_dropdown_data="set_dropdown_data" />
+                    @set_dropdown_data="set_dropdown_data" :selected="dropdown.cpu.selected"/>
             </div>
 
             <!-- RAM 단위 조정 -->
@@ -95,7 +95,7 @@
                 </div>
 
                 <Dropdown :base="dropdown.ram.base" :content="dropdown.ram.content" :category="'ram'"
-                    @set_dropdown_data="set_dropdown_data" />
+                    @set_dropdown_data="set_dropdown_data" :selected="dropdown.ram.selected" />
             </div>
         </div>
 
@@ -115,6 +115,7 @@
                 </div>
 
                 <Dropdown :base="dropdown.gpu.base" :content="dropdown.gpu.content" :category="'gpu'"
+                :selected="dropdown.gpu.selected" 
                     @set_dropdown_data="set_dropdown_data" />
             </div>
 
@@ -124,7 +125,7 @@
                     제조사
                 </div>
 
-                <Dropdown :base="dropdown.gpuCompany.base" :content="dropdown.gpuCompany.content" :category="'gpuCompany'"
+                <Dropdown :base="dropdown.gpuCompany.base" :content="dropdown.gpuCompany.content" :category="'gpuCompany'" :selected="dropdown.gpuCompany.selected" 
                     @set_dropdown_data="set_dropdown_data" />
             </div>
         </div>
@@ -169,7 +170,7 @@
                 </div>
 
                 <Dropdown :base="dropdown.volumeCount.base" :content="dropdown.volumeCount.content"
-                    :category="'volumeCount'" @set_dropdown_data="set_dropdown_data" />
+                    :category="'volumeCount'" :selected="dropdown.volumeCount.selected" @set_dropdown_data="set_dropdown_data" />
             </div>
         </div>
 
@@ -320,11 +321,6 @@ export default {
                     "content": ["NVIDIA", "AMD"],
                     "selected": null,
                 },
-                "volume": {
-                    "base": "스토리지 용량을 선택해주세요.",
-                    "content": ["256GB", "512GB", "1TB", "2TB"],
-                    "selected": null,
-                },
                 "volumeCount": {
                     "base": "추가 스토리지 개수를 선택해주세요.",
                     "content": ["1", "2"],
@@ -338,7 +334,7 @@ export default {
                 "ram": null,
                 "gpu": null,
                 "gpuCompany": null,
-                "volume": 128,
+                "volume": null,
                 "volumeCount": null
             },
             allSelected: null,
@@ -440,6 +436,21 @@ export default {
         };
 
         this.modal = new Modal($targetEl, options);
+
+        let tmp_os_num = this.plan[this.$route.params.plan_num].select[0];
+        let tmp_volume_num = this.plan[this.$route.params.plan_num].select[5];
+        
+        document.getElementById("os-option-" + tmp_os_num).checked = true;
+        this.selectedService.os = this.osOption[tmp_os_num].name;
+            
+        this.selectedService.volume = tmp_volume_num;
+    },
+    created() {
+        let i = 0;
+        for (const key in this.dropdown) {
+            this.dropdown[key].selected = this.plan[this.$route.params.plan_num].select[i];
+            i++;
+        }
     },
     // components: {
     //   Carousel,
