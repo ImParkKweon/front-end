@@ -16,7 +16,7 @@
                             아이디
                         </td>
                         <td class="border-b-2 border-gray-100">
-                            <input id="id" type="text" class="w-full py-3 px-1
+                            <input v-model="userID" id="id" type="text" class="w-full py-3 px-1
                             border-none border-transparent focus:border-transparent focus:ring-0" />
                         </td>
                     </tr>
@@ -32,7 +32,7 @@
                             비밀번호
                         </td>
                         <td class="border-b-2 border-gray-100">
-                            <input id="pw" type="password" class="py-3 px-1 w-full 
+                            <input v-model="userPW" id="pw" type="password" class="py-3 px-1 w-full 
                             border-none border-transparent focus:border-transparent focus:ring-0" />
                         </td>
                     </tr>
@@ -48,14 +48,23 @@
                             비밀번호 확인
                         </td>
                         <td class="border-b-2 border-gray-100">
-                            <input id="pwconfig" type="password" class="py-3 px-1 w-full 
+                            <input v-model="userPW_check" id="pwconfig" type="password" class="py-3 px-1 w-full 
                             border-none border-transparent focus:border-transparent focus:ring-0" />
                         </td>
                     </tr>
 
                     <tr>
-                        <td colspan="2" class="text-gray-600 font-light pt-1 pb-7 text-right">
+                        <td v-if="checkPW_content == 'default'"
+                        colspan="2" class="text-gray-600 font-light pt-1 pb-7 text-right">
                             비밀번호를 다시 입력해 주세요.
+                        </td>
+                        <td v-if="checkPW_content == 'red'"
+                        colspan="2" class="text-red-600 font-light pt-1 pb-7 text-right">
+                            다시 확인해 주세요.
+                        </td>
+                        <td v-if="checkPW_content == 'green'"
+                        colspan="2" class="text-green-600 font-light pt-1 pb-7 text-right">
+                            완벽해요!
                         </td>
                     </tr>
                 </table>
@@ -67,12 +76,12 @@
                 <span>가입 약관 동의</span>
             </div>
 
-            <!-- 모든 약관 동의 (allCheck) -->
+            <!-- 모든 약관 동의 (all_check) -->
             <div class="flex items-center mr-4 mt-4 mb-3">
-                <input id="allCheck" type="checkbox" value="checkbox-1"
+                <input id="all_check" type="checkbox" value="checkbox-1"
                     class="cursor-pointer w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                    @click="allCheck">
-                <label for="allCheck" class="ml-2 font-medium text-gray-900 dark:text-gray-300">
+                    @click="all_check">
+                <label for="all_check" class="ml-2 font-medium text-gray-900 dark:text-gray-300">
                     모든 약관에 동의합니다.
                 </label>
             </div>
@@ -81,7 +90,7 @@
             <div v-for="i in checkBox" :key="i"
                 class="flex max-sm:flex-col max-sm:justify-start max-sm:items-start items-center justify-between mr-4 mb-1">
                 <div class="justify-self-start">
-                    <input :id="'checkbox-' + i" :value="'checkbox-' + i" name="checkbox" type="checkbox" 
+                    <input :id="'checkbox-' + i" :value="'checkbox-' + i" name="checkbox" type="checkbox"
                         class="cursor-pointer w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                     <label :for="'checkbox-' + i" class="ml-2 font-base text-gray-900 dark:text-gray-300">
                         {{ i }}
@@ -97,7 +106,7 @@
             <div class="my-4 border-b-2 border-gray-100"></div>
 
             <div>
-                <button class="login-button max-md:text-xl">회원가입</button>
+                <button @click="register" class="login-button max-md:text-xl">회원가입</button>
             </div>
         </div>
     </div>
@@ -107,34 +116,89 @@
   
 <script>
 import TitleHeader from './TitleHeader.vue';
+import axios from 'axios';
 
 export default {
     name: 'SignupPage',
     data() {
         return {
             checkBox: [
-                "1 이용약관 및 처리방침에 동의합니다.", 
+                "1 이용약관 및 처리방침에 동의합니다.",
                 "2 이용약관 및 처리방침에 동의합니다.",
                 "3 이용약관 및 처리방침에 동의합니다."
             ],
-            allChecked: false,
+            all_checked: false,
+
+            userID: null,
+            userPW: null,
+            userPW_check: null,
+            userID_config: true,
+            userPW_config: true,
+            checkPW_content: "default",
         }
     },
     methods: {
-        allCheck() {
+        all_check() {
             const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-            
-            if(!this.allChecked) {
+
+            if (!this.all_checked) {
                 checkboxes.forEach((checkbox) => {
                     checkbox.checked = true;
                 });
-                this.allChecked = true;
+                this.all_checked = true;
             }
             else {
                 checkboxes.forEach((checkbox) => {
                     checkbox.checked = false;
                 });
-                this.allChecked = false;
+                this.all_checked = false;
+            }
+        },
+        async register() {
+            // 입력값 유효 검사
+            if (this.userID == null || this.userID == "") {
+                this.userID_config = false;
+            }
+            else {
+                this.userID_config = true;
+            }
+
+            if (this.userPW == null || this.userPW == "") {
+                this.userPW_config = false;
+            }
+            else if (!this.userPW_check) {
+                this.userPW_config = false;
+            }
+            else {
+                this.userPW_config = true;
+            }
+            
+            // 회원가입 api 요청
+            if (this.userID_config && this.userPW_config) {
+                await axios.post(
+                    'http://113.198.229.227:9303/register',
+                    {
+                        username: this.userID,
+                        pwd: this.userPW
+                    }).then((res) => {
+                        console.log(res);
+                        if (res) {
+                            this.$router.push('/');
+                        }
+                        else {
+                            console.log("로그인 실패");
+                        }
+                    });
+            }
+        }
+    },
+    watch: {
+        userPW_check: function(newVal) {
+            if (newVal == this.userPW) {
+                this.checkPW_content = "green";
+            }
+            else if (newVal != this.userPW) {
+                this.checkPW_content = "red";
             }
         }
     },
@@ -144,16 +208,8 @@ export default {
     components: {
         TitleHeader: TitleHeader,
     },
-    watch: {
-        // allCheck: function(newValue) {
-        //     if(!newValue) {
-        //         const allCheckBox = document.getElementById('allCheck');
-        //         allCheckBox.checked = false;
-        //     }
-        // }
-    },
     created() {
-        
+
     },
 }
 </script>

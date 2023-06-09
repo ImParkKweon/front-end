@@ -97,7 +97,7 @@
             {{ a.comment }}
           </div>
 
-          <button @click="toSubscribePage(i)"
+          <button @click="to_subscribe_page(i)"
             class="hover:bg-teal-800
             border-transparent bg-teal-700 text-white font-light flex justify-center items-center rounded-5 px-4 py-2.5 w-1/6 min-w-[150px] m-auto">
             <span>
@@ -170,7 +170,7 @@ export default {
 
       this.$refs.carousel.style.transform = `translate3d(${-size * this.carouselIndex}px, 0, 0)`;
     },
-    toSubscribePage(i) {
+    to_subscribe_page(i) {
       console.log(i);
       this.$router.push({
         name: "SubscribePage",

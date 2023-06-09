@@ -85,7 +85,7 @@
                 </div>
 
                 <Dropdown :base="dropdown.cpu.base" :content="dropdown.cpu.content" :category="'cpu'"
-                    @setDropdownData="setDropdownData" />
+                    @set_dropdown_data="set_dropdown_data" />
             </div>
 
             <!-- RAM 단위 조정 -->
@@ -95,7 +95,7 @@
                 </div>
 
                 <Dropdown :base="dropdown.ram.base" :content="dropdown.ram.content" :category="'ram'"
-                    @setDropdownData="setDropdownData" />
+                    @set_dropdown_data="set_dropdown_data" />
             </div>
         </div>
 
@@ -115,7 +115,7 @@
                 </div>
 
                 <Dropdown :base="dropdown.gpu.base" :content="dropdown.gpu.content" :category="'gpu'"
-                    @setDropdownData="setDropdownData" />
+                    @set_dropdown_data="set_dropdown_data" />
             </div>
 
             <!-- GPU 제조사 선택 -->
@@ -125,7 +125,7 @@
                 </div>
 
                 <Dropdown :base="dropdown.gpuCompany.base" :content="dropdown.gpuCompany.content" :category="'gpuCompany'"
-                    @setDropdownData="setDropdownData" />
+                    @set_dropdown_data="set_dropdown_data" />
             </div>
         </div>
 
@@ -145,7 +145,7 @@
                 </div>
 
                 <!-- <Dropdown :base="dropdown.volume.base" :content="dropdown.volume.content" :category="'volume'"
-                    @setDropdownData="setDropdownData" /> -->
+                    @set_dropdown_data="set_dropdown_data" /> -->
                 <div class="my-1">
                     <div class="flex justify-between items-center">
                         <span>1</span>
@@ -169,7 +169,7 @@
                 </div>
 
                 <Dropdown :base="dropdown.volumeCount.base" :content="dropdown.volumeCount.content"
-                    :category="'volumeCount'" @setDropdownData="setDropdownData" />
+                    :category="'volumeCount'" @set_dropdown_data="set_dropdown_data" />
             </div>
         </div>
 
@@ -244,7 +244,7 @@
                     </div>
                     <!-- Modal footer -->
                     <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600 justify-center">
-                        <button @click="modal.hide(); $router.push('/mypage');"
+                        <button @click="subscribe_selected_end"
                         type="button"
                             class="text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800">
                             확인
@@ -379,7 +379,7 @@ export default {
     },
     methods: {
         // dropdown 컴포넌트에서 선택한 데이터를 저장함
-        setDropdownData(category, data) {
+        set_dropdown_data(category, data) {
             this.selectedService[category] = data;
             // console.log(this.selectedService[category]);
         },
@@ -408,6 +408,14 @@ export default {
 
             this.modal.show();
         },
+        subscribe_selected_end() {
+            this.modal.hide();
+
+            // 현재 로그인한 계정에 구독 서비스 추가하는 api
+
+
+            this.$router.push('/mypage');
+        }
     },
     mounted() {
         initFlowbite();
@@ -432,7 +440,6 @@ export default {
         };
 
         this.modal = new Modal($targetEl, options);
-            // this.modal.show();
     },
     // components: {
     //   Carousel,
