@@ -174,8 +174,7 @@
         </div>
 
         <!-- 모든 사항을 선택해주세요. -->
-        <div v-if="allSelected == false"
-        id="toast-danger"
+        <div v-if="allSelected == false" id="toast-danger"
             class="flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 m-auto"
             role="alert">
             <div
@@ -192,12 +191,73 @@
         </div>
 
         <!-- 완료 버튼 -->
-        <button @click="subscribe_select_complete"
+        <button id="check-modal-button"
+            @click="subscribe_select_complete"
             class="bg-[#00BF9E] hover:bg-[#12B79A] rounded-full max-md:px-32 md:px-36 py-4 flex m-auto my-4">
             <span class="text-white font-semibold max-md:text-2xl md:text-3xl">
                 완료
             </span>
         </button>
+
+        <!-- Main modal -->
+        <div id="check-modal" tabindex="-1" aria-hidden="true"
+            class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div class="relative w-full max-w-2xl max-h-full">
+                <!-- Modal content -->
+                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <!-- Modal header -->
+                    <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                            서비스 선택 사항 확인
+                        </h3>
+                        <button type="button"
+                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="sr-only">Close modal</span>
+                        </button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="p-6">
+                        <div class="text-center sm:text-4xl max-sm:text-xl font-semibold">
+                            {{ plan[$route.params.plan_num].name }}
+                        </div>
+                        <div class="text-center text-lg max-sm:text-sm mt-2">
+                            {{ plan[$route.params.plan_num].comment }}
+                        </div>
+
+                        <table class="rounded-4 bg-white mt-4 w-full xl:h-4/5">
+                            <tr v-for="i in myData" :key="i">
+                                <td class="max-xl:py-5 w-1/2 pr-5 font-semibold text-right">
+                                    {{ i.base }}
+                                </td>
+                                <td class="max-xl:py-5 w-1/2 pl-5
+                        border-l-2 border-gray-100">
+                                    {{ i.content }}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600 justify-center">
+                        <button @click="modal.hide(); $router.push('/mypage');"
+                        type="button"
+                            class="text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800">
+                            확인
+                        </button>
+                        <button @click="modal.hide()"
+                        type="button"
+                            class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-teal-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                            취소
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
 </template>
@@ -210,6 +270,7 @@ import Dropdown from './Dropdown.vue';
 import { computed } from "vue";
 import { useStore } from "vuex";
 import { initFlowbite } from 'flowbite';
+import { Modal } from 'flowbite';
 
 export default {
     name: 'SubscribePage',
@@ -270,6 +331,7 @@ export default {
                     "selected": null,
                 }
             },
+            // 컨테이너 생성 시 필요한 정보
             selectedService: {
                 "os": null,
                 "cpu": null,
@@ -280,6 +342,39 @@ export default {
                 "volumeCount": null
             },
             allSelected: null,
+            // 확인 모달 창에서 띄울 선택 정보
+            myData: [
+                {
+                    "base": "OS",
+                    "content": null,
+                },
+                {
+                    "base": "CPU 단위",
+                    "content": null
+                },
+                {
+                    "base": "RAM 단위",
+                    "content": null
+                },
+                {
+                    "base": "GPU 개수",
+                    "content": null
+                },
+                {
+                    "base": "GPU 제조사",
+                    "content": null
+                },
+                {
+                    "base": "Storage 용량",
+                    "content": null
+                },
+                {
+                    "base": "Storage 개수",
+                    "content": null
+                }
+            ],
+            // modal component
+            modal: null,
         }
     },
     methods: {
@@ -290,25 +385,54 @@ export default {
         },
         subscribe_select_complete() {
             console.log(this.selectedService);
-            if(this.check_all_selected()) {
-                this.$router.push('/mypage');
-            }
+            // if (this.check_all_selected()) {
+            //     this.$router.push('/mypage');
+            // }
+            this.check_all_selected();
         },
         check_all_selected() {
             for (const key in this.selectedService) {
-                // console.log(key);
-                // console.log(value);
-                if(this.selectedService[key] == null) {
+                if (this.selectedService[key] == null) {
                     this.allSelected = false;
                     return false;
                 }
             }
 
-            return true;
+            this.allSelected = true;
+
+            let i = 0;
+            for (const key in this.selectedService) {
+                this.myData[i].content = this.selectedService[key];
+                i++;
+            }
+
+            this.modal.show();
         },
     },
     mounted() {
         initFlowbite();
+
+        // modal component 생성
+        const $targetEl = document.getElementById('check-modal');
+
+        // modal component 옵션
+        const options = {
+            placement: 'center',
+            backdrop: 'dynamic',
+        closable: true,
+            onHide: () => {
+                console.log('modal is hidden');
+            },
+            onShow: () => {
+                console.log('modal is shown');
+            },
+            onToggle: () => {
+                console.log('modal has been toggled');
+            }
+        };
+
+        this.modal = new Modal($targetEl, options);
+            // this.modal.show();
     },
     // components: {
     //   Carousel,
