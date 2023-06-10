@@ -155,6 +155,9 @@ export default {
             }
         },
         async register() {
+            console.log(this.userID);
+            console.log(this.userPW);
+
             // 입력값 유효 검사
             if (this.userID == null || this.userID == "") {
                 this.userID_config = false;
@@ -172,16 +175,21 @@ export default {
             else {
                 this.userPW_config = true;
             }
+
+            var config = {
+                method: 'post',
+                url: 'backend-svc.product.svc.cluster.local/register',
+                baseURL: null,
+                body: {
+                    username: this.userID,
+                    pwd: this.userPW
+                }
+            }
+
             
             // 회원가입 api 요청
             if (this.userID_config && this.userPW_config) {
-                await axios.post(
-                    'backend-svc.product.svc.cluster.local/register',
-                    {
-                        username: this.userID,
-                        pwd: this.userPW
-                    }
-                ).then((res) => {
+                await axios.post(config).then((res) => {
                         console.log(res.data);
                         if (res) {
                             this.$router.push('/');

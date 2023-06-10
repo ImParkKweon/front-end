@@ -86,14 +86,19 @@ export default {
                 this.userPW_config = true;
             }
 
+            var config = {
+                method: 'post',
+                url: 'backend-svc.product.svc.cluster.local/login',
+                baseURL: null,
+                body: {
+                    id: this.userID,
+                    pw: this.userPW
+                }
+            }
+
             // login api 요청
             if (this.userID_config && this.userPW_config) {
-                await axios.post(
-                    'backend-svc.product.svc.cluster.local/login',
-                    {
-                        id: this.userID,
-                        pw: this.userPW
-                    }).then((res) => {
+                await axios.post(config).then((res) => {
                         console.log(res.data);
                         if (res) {
                             this.$router.push('/');
