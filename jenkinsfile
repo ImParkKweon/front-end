@@ -3,7 +3,7 @@ pipeline {
 		DOCKERHUB_CRED = credentials('docker_credentials')
 	}
 	agent any
-  }
+  
 	stages {
 		stage("Checkout") {
 			steps {
@@ -37,7 +37,6 @@ pipeline {
 		}
 	}
 }
-
 // ---
 
 
