@@ -89,12 +89,12 @@ export default {
             // login api 요청
             if (this.userID_config && this.userPW_config) {
                 await axios.post(
-                    'backend-svc.product.svc.cluster.local/register',
+                    'backend-svc.product.svc.cluster.local/login',
                     {
-                        username: this.userID,
-                        pwd: this.userPW
+                        id: this.userID,
+                        pw: this.userPW
                     }).then((res) => {
-                        console.log(res);
+                        console.log(res.data);
                         if (res) {
                             this.$router.push('/');
                         }
