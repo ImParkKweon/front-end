@@ -17,6 +17,13 @@ pipeline {
 				}
 			}
 		}
+		stage("latest_image_tag") {
+			steps {
+				script {
+					sh "docker image tag hyunjun1325/frontend:$BUILD_NUMBER hyunjun1325/frontend"
+				}
+			}
+		}
 		stage("Docker_login") {
 			steps {
 				sh 'echo $DOCKERHUB_CRED_PSW | docker login -u $DOCKERHUB_CRED_USR --password-stdin'
@@ -29,6 +36,7 @@ pipeline {
 				}
 			}
 		}
+		
 		stage("Push_image_latest") {
 			steps {
 				script {
