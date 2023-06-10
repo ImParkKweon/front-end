@@ -3,6 +3,9 @@ pipeline {
 		DOCKERHUB_CRED = credentials('docker_credentials')
 	}
 	agent any
+	parameters {
+    imageTag(name: 'DOCKER_IMAGE', image: 'hyunjun1325@icloud.com/frontend'
+  }
 	stages {
 		stage("Checkout") {
 			steps {
@@ -13,7 +16,7 @@ pipeline {
 		stage("Build") {
 			steps {
                 script {
-					sh "docker build -t hyunjun1325:$BUILD_NUMBER ."
+					sh "docker build -t #DOCKER_IMAGE_IMAGE:$BUILD_NUMBER ."
 					// sh "docker build -t $BUILD_NUMBER ."
 					// sh "docker build ."
 				}
