@@ -19,7 +19,8 @@ pipeline {
 		stage("Build") {
 			steps {
                 script {
-					sh "docker build -t hyunjun1325@icloud.comfrontend:$BUILD_NUMBER ."
+					sh "variable=${variable//"/"/-}"
+					sh "docker build -t $BUILD_NUMBER ."
 				}
 			}
 		}
