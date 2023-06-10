@@ -178,8 +178,8 @@ export default {
 
             var config = {
                 method: 'post',
-                url: 'backend-svc.product.svc.cluster.local/register',
-                baseURL: null,
+                url: '/register',
+                baseURL: "backend-svc.product.svc.cluster.local",
                 body: {
                     username: this.userID,
                     pwd: this.userPW

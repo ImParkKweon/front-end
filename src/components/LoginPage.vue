@@ -88,8 +88,8 @@ export default {
 
             var config = {
                 method: 'post',
-                url: 'backend-svc.product.svc.cluster.local/login',
-                baseURL: null,
+                url: '/login',
+                baseURL: "backend-svc.product.svc.cluster.local",
                 body: {
                     id: this.userID,
                     pw: this.userPW
