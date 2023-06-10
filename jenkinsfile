@@ -8,7 +8,8 @@ pipeline {
 	environment {
 		DOCKERHUB_CRED = credentials('docker_credentials')
 	}
-	agent {dockerfile true }
+	// agent {dockerfile true }
+	agent none
 	stages {
 		stage("Checkout") {
 			steps {
@@ -19,7 +20,7 @@ pipeline {
 		stage("Build") {
 			steps {
                 script {
-					sh "docker build -t hyunjun1325@icloud.com/frontend:$BUILD_NUMBER ."
+					// sh "docker build -t hyunjun1325@icloud.com/frontend:$BUILD_NUMBER ."
 					sh 'docker build -t $BUILD_NUMBER .'
 					// sh "docker build ."
 				}
