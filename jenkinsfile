@@ -1,15 +1,9 @@
 pipeline {
-	// agent dockerfile {
-	// 	filename 'Dockerfile.build'
-	// 	dir '.'
-	// 	label 'dockerfile-label'
-	// 	additionalBuildArgs ''
-	// }
 	environment {
 		DOCKERHUB_CRED = credentials('docker_credentials')
 	}
-	// agent {dockerfile true }
 	agent any
+  
 	stages {
 		stage("Checkout") {
 			steps {
@@ -20,9 +14,7 @@ pipeline {
 		stage("Build") {
 			steps {
                 script {
-					// sh "docker build -t hyunjun1325@icloud.com/frontend:$BUILD_NUMBER ."
-					sh "docker build -t $BUILD_NUMBER ."
-					// sh "docker build ."
+					sh "docker build -t hyunjun1325/frontend:$BUILD_NUMBER ."
 				}
 			}
 		}
@@ -34,15 +26,52 @@ pipeline {
 		stage("Push_image") {
 			steps {
 				script {
-					sh "docker push hyunjun1325@icloud.com/frontend:$BUILD_NUMBER"
+					sh "docker push hyunjun1325/frontend:$BUILD_NUMBER"
 				}
 			}
 		}
-		// stage('Clean_image') {
-		// 	steps {
-		// 		sh "docker rmi hyunjun1325@icloud.com/frontend:$BUILD_NUMBER"
-		// 	}
-		// }
+		stage('Clean_image') {
+			steps {
+				sh "docker rmi hyunjun1325/frontend:$BUILD_NUMBER"
+			}
+		}
 	}
 }
+// ---
 
+
+// pipeline {
+// 	// Agent block
+// 	agent { node }
+// 	environment {
+// 		DOCKERHUB_CRED = credentials('docker_credentials')
+// 	}
+// 	parameters {
+// 		string(name: "Image_Name", defaultValue: 'hyunjun1325@icloud.com/frontend')   
+// 	}
+// 	// Stage Block
+// 	stages { // stage blocks
+// 		stage("Build docker images") {
+// 			steps {
+// 				script {
+// 					echo "Bulding docker images"
+// 					docker.build("${params.Image_Name}:$BUILD_NUMBER")
+// 				}
+// 			}
+// 		}
+// 		stage("Docker_login") {
+// 					steps {
+// 						sh 'echo $DOCKERHUB_CRED_PSW | docker login -u $DOCKERHUB_CRED_USR --password-stdin'
+// 					}
+// 		}
+// 		stage("Push to Dockerhub") {
+// 			steps {
+// 				script {
+// 					echo "Pushing the image to docker hub"
+// 					docker push "${params.Image_Name}:$BUILD_NUMBER"
+					
+// 				}
+// 			}
+// 		}
+// 	}
+// }
