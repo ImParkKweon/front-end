@@ -32,7 +32,7 @@ pipeline {
 		stage("Push_image_latest") {
 			steps {
 				script {
-					sh "docker push hyunjun1325/frontend:latest"
+					sh "docker push hyunjun1325/frontend"
 				}
 			}
 		}
@@ -43,7 +43,7 @@ pipeline {
 		}
 		stage('Clean_latest_image') {
 			steps {
-				sh "docker rmi hyunjun1325/frontend:latest"
+				sh "docker rmi hyunjun1325/frontend"
 			}
 		}
 	}
