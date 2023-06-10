@@ -4,7 +4,7 @@ pipeline {
 	}
 	agent any
 	parameters {
-    imageTag(name: 'DOCKER_IMAGE', image: 'hyunjun1325@icloud.com/frontend')
+    imageTag(name: 'DOCKER_IMAGE', image: 'hyunjun1325icloud/frontend')
   }
 	stages {
 		stage("Checkout") {
