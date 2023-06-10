@@ -19,8 +19,7 @@ pipeline {
 		stage("Build") {
 			steps {
                 script {
-					sh "variable=${variable//"/"/-}"
-					sh "docker build -t $BUILD_NUMBER ."
+					sh "docker build ."
 				}
 			}
 		}
