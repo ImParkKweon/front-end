@@ -174,13 +174,20 @@ export default {
             }
             
             // 회원가입 api 요청
+            var config = {
+                method: 'post',
+                maxBodyLength: Infinity,
+                url: 'backend-svc.product.svc.cluster.local/register',
+                body: {
+                    username: this.userID,
+                    pwd: this.userPW
+                }
+            }
+            
             if (this.userID_config && this.userPW_config) {
                 await axios.post(
-                    'backend-svc.product.svc.cluster.local/register',
-                    {
-                        username: this.userID,
-                        pwd: this.userPW
-                    }).then((res) => {
+                    config
+                ).then((res) => {
                         console.log(res);
                         if (res) {
                             this.$router.push('/');
