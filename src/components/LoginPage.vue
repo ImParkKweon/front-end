@@ -86,27 +86,23 @@ export default {
                 this.userPW_config = true;
             }
 
-            var config = {
-                method: 'post',
-                url: '/login',
-                baseURL: "http://backend-svc.product.svc.cluster.local",
-                body: {
-                    id: this.userID,
-                    pw: this.userPW
-                }
-            }
-
             // login api 요청
             if (this.userID_config && this.userPW_config) {
-                await axios.post(config).then((res) => {
-                        console.log(res.data);
-                        if (res) {
-                            this.$router.push('/');
-                        }
-                        else {
-                            console.log("로그인 실패");
-                        }
-                    });
+                await axios.post(
+                    'http://backend-svc.product.svc.cluster.local/login',
+                    {
+                        id: this.userID,
+                        pw: this.userPW
+                    }
+                ).then((res) => {
+                    console.log(res.data);
+                    if (res) {
+                        this.$router.push('/');
+                    }
+                    else {
+                        console.log("로그인 실패");
+                    }
+                });
             }
 
         }

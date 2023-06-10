@@ -54,16 +54,16 @@
                     </tr>
 
                     <tr>
-                        <td v-if="checkPW_content == 'default'"
-                        colspan="2" class="text-gray-600 font-light pt-1 pb-7 text-right">
+                        <td v-if="checkPW_content == 'default'" colspan="2"
+                            class="text-gray-600 font-light pt-1 pb-7 text-right">
                             비밀번호를 다시 입력해 주세요.
                         </td>
-                        <td v-if="checkPW_content == 'red'"
-                        colspan="2" class="text-red-600 font-light pt-1 pb-7 text-right">
+                        <td v-if="checkPW_content == 'red'" colspan="2"
+                            class="text-red-600 font-light pt-1 pb-7 text-right">
                             다시 확인해 주세요.
                         </td>
-                        <td v-if="checkPW_content == 'green'"
-                        colspan="2" class="text-green-600 font-light pt-1 pb-7 text-right">
+                        <td v-if="checkPW_content == 'green'" colspan="2"
+                            class="text-green-600 font-light pt-1 pb-7 text-right">
                             완벽해요!
                         </td>
                     </tr>
@@ -176,33 +176,29 @@ export default {
                 this.userPW_config = true;
             }
 
-            var config = {
-                method: 'post',
-                url: '/register',
-                baseURL: "http://backend-svc.product.svc.cluster.local",
-                body: {
-                    username: this.userID,
-                    pwd: this.userPW
-                }
-            }
-
-            
             // 회원가입 api 요청
             if (this.userID_config && this.userPW_config) {
-                await axios.post(config).then((res) => {
-                        console.log(res.data);
-                        if (res) {
-                            this.$router.push('/');
-                        }
-                        else {
-                            console.log("로그인 실패");
-                        }
-                    });
+                await axios.post(
+                    'http://backend-svc.product.svc.cluster.local/register',
+                    {
+                        username: this.userID,
+                        pwd: this.userPW
+                    }
+
+                ).then((res) => {
+                    console.log(res.data);
+                    if (res) {
+                        this.$router.push('/');
+                    }
+                    else {
+                        console.log("로그인 실패");
+                    }
+                });
             }
         }
     },
     watch: {
-        userPW_check: function(newVal) {
+        userPW_check: function (newVal) {
             if (newVal == this.userPW) {
                 this.checkPW_content = "green";
             }
