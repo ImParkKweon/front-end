@@ -19,7 +19,9 @@ pipeline {
 		stage("Build") {
 			steps {
                 script {
-					sh "docker build ."
+					// sh "docker build -t hyunjun1325@icloud.com/frontend:$BUILD_NUMBER ."
+					// sh "docker build ."
+					app = docker.build("hyunjun1325@icloud.com/frontend:$BUILD_NUMBER")
 				}
 			}
 		}
@@ -31,14 +33,15 @@ pipeline {
 		stage("Push_image") {
 			steps {
 				script {
-					sh "docker push hyunjun1325@icloud.com/frontend:$BUILD_NUMBER"
+					// sh "docker push hyunjun1325@icloud.com/frontend:$BUILD_NUMBER"
+					app.push("hyunjun1325@icloud.com/frontend:$BUILD_NUMBER")
 				}
 			}
 		}
-		stage('Clean_image') {
-			steps {
-				sh "docker rmi hyunjun1325@icloud.com/frontend:$BUILD_NUMBER"
-			}
-		}
+		// stage('Clean_image') {
+		// 	steps {
+		// 		sh "docker rmi hyunjun1325@icloud.com/frontend:$BUILD_NUMBER"
+		// 	}
+		// }
 	}
 }
