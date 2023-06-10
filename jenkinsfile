@@ -9,7 +9,7 @@ pipeline {
 		DOCKERHUB_CRED = credentials('docker_credentials')
 	}
 	// agent {dockerfile true }
-	agent none
+	agent any
 	stages {
 		stage("Checkout") {
 			steps {
