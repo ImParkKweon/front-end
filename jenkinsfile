@@ -21,7 +21,7 @@ pipeline {
 			steps {
                 script {
 					// sh "docker build -t hyunjun1325@icloud.com/frontend:$BUILD_NUMBER ."
-					sh 'docker build -t $BUILD_NUMBER .'
+					sh "docker build -t $BUILD_NUMBER ."
 					// sh "docker build ."
 				}
 			}
