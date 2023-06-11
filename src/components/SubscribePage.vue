@@ -408,17 +408,17 @@ export default {
             this.modal.show();
         },
         async subscribe_selected_end() {
-            this.modal.hide();
+            await this.modal.hide();
 
-            const serviceData = {
+            let serviceData = {
                 username: this.username,
-                os: this.selectedService.os,
-                cpu: this.selectedService.cpu,
-                ram: this.selectedService.ram,
-                gpu: this.selectedService.gpu,
-                gpuCompany: this.selectedService.gpuCompany,
-                volume: this.selectedService.volume,
-                volumeCount: this.selectedService.volumeCount
+                os: this.selectedService["os"],
+                cpu: this.selectedService["cpu"],
+                ram: this.selectedService["ram"],
+                gpu: this.selectedService["gpu"],
+                gpuCompany: this.selectedService["gpuCompany"],
+                volume: this.selectedService["volume"],
+                volumeCount: this.selectedService["volumeCount"]
             }
 
             console.log(serviceData);
@@ -429,7 +429,7 @@ export default {
                 console.log(res.data);
             })
 
-            this.$router.push('/mypage');
+            await this.$router.push('/mypage');
         }
     },
     mounted() {
