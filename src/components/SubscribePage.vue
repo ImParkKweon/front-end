@@ -418,14 +418,24 @@ export default {
                 volumeCount: this.selectedService["volumeCount"]
             }
 
+            var urlencoded = new URLSearchParams();
+            urlencoded.append("username", serviceData.os);
+            urlencoded.append("os", serviceData.os);
+            urlencoded.append("cpu", serviceData.cpu);
+            urlencoded.append("ram", serviceData.ram);
+            urlencoded.append("gpu", serviceData.gpu);
+            urlencoded.append("gpuCompany", serviceData.gpuCompany);
+            urlencoded.append("volume", serviceData.volume);
+            urlencoded.append("volumeCount", serviceData.volumeCount);
+
             let config = {
-                method: 'post',
+                method: 'POST',
                 maxBodyLength: Infinity,
                 url: 'http://113.198.229.227:9303/service',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                data: serviceData
+                body: urlencoded
             };
 
             console.log(serviceData);
