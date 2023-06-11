@@ -407,9 +407,7 @@ export default {
         async subscribe_selected_end() {
             await this.modal.hide();
 
-            // 현재 로그인한 계정에 구독 서비스 추가하는 api
-            await axios.post('http://113.198.229.227:9303/service', 
-            {
+            let serviceData = {
                 username: this.username,
                 os: this.selectedService["os"],
                 cpu: this.selectedService["cpu"],
@@ -418,7 +416,22 @@ export default {
                 gpuCompany: this.selectedService["gpuCompany"],
                 volume: this.selectedService["volume"],
                 volumeCount: this.selectedService["volumeCount"]
-            })
+            }
+
+            let config = {
+                method: 'post',
+                maxBodyLength: Infinity,
+                url: 'http://113.198.229.227:9303/service',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                data: serviceData
+            };
+
+            console.log(serviceData);
+
+            // 현재 로그인한 계정에 구독 서비스 추가하는 api
+            await axios.post(config)
                 .then((res) => {
                     console.log(res.data);
                 })
