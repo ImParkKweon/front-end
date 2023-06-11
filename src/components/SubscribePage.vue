@@ -273,6 +273,8 @@ import { useStore } from "vuex";
 import { initFlowbite } from 'flowbite';
 import { Modal } from 'flowbite';
 
+import axios from 'axios';
+
 export default {
     name: 'SubscribePage',
     setup() {
@@ -371,6 +373,7 @@ export default {
             ],
             // modal component
             modal: null,
+            username: null,
         }
     },
     methods: {
@@ -404,11 +407,25 @@ export default {
 
             this.modal.show();
         },
-        subscribe_selected_end() {
+        async subscribe_selected_end() {
             this.modal.hide();
 
-            // 현재 로그인한 계정에 구독 서비스 추가하는 api
+            const serviceData = {
+                username: this.username,
+                os: this.selectedService.os,
+                cpu: this.selectedService.cpu,
+                ram: this.selectedService.ram,
+                gpu: this.selectedService.gpu,
+                gpuCompany: this.selectedService.gpuCompany,
+                volume: this.selectedService.volume,
+                volumeCount: this.selectedService.volumeCount
+            }
 
+            // 현재 로그인한 계정에 구독 서비스 추가하는 api
+            await axios.post('http://113.198.229.227:9303/selectedService', serviceData)
+            .then((res) => {
+                console.log(res.data);
+            })
 
             this.$router.push('/mypage');
         }
@@ -439,7 +456,7 @@ export default {
 
         let tmp_os_num = this.plan[this.$route.params.plan_num].select[0];
         let tmp_volume_num = this.plan[this.$route.params.plan_num].select[5];
-        
+
         document.getElementById("os-option-" + tmp_os_num).checked = true;
         this.selectedService.os = this.osOption[tmp_os_num].name;
             
@@ -450,6 +467,10 @@ export default {
         for (const key in this.dropdown) {
             this.dropdown[key].selected = this.plan[this.$route.params.plan_num].select[i];
             i++;
+        }
+
+        if(localStorage.getItem('username')) {
+            this.username = localStorage.getItem('username');
         }
     },
     // components: {

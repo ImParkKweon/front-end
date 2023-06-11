@@ -119,6 +119,7 @@
   
 <script>
 import TitleHeader from './TitleHeader.vue';
+import axios from 'axios';
 
 export default {
     name: 'MyPage',
@@ -127,33 +128,54 @@ export default {
             myData: [
                 {
                     "base": "OS",
-                    "content": "Linux",
+                    "content": null,
                 },
                 {
                     "base": "CPU 단위",
-                    "content": "가상 1코어"
+                    "content": null
                 },
                 {
                     "base": "RAM 단위",
-                    "content": "16GB"
+                    "content": null
                 },
                 {
                     "base": "GPU 개수",
-                    "content": "1"
+                    "content": null
                 },
                 {
                     "base": "GPU 제조사",
-                    "content": "NVIDIA"
+                    "content": null
                 },
                 {
                     "base": "Storage 용량",
-                    "content": "256GB"
+                    "content": null
                 },
                 {
                     "base": "Storage 개수",
-                    "content": "1"
+                    "content": null
                 }
-            ]
+            ],
+            username: null,
+        }
+    },
+    async created() {
+        if(localStorage.getItem('username')) {
+            this.username = localStorage.getItem('username');
+
+            // 현재 유저가 구독한 서비스 정보를 가져오는 api
+            await axios.get('http://113.198.229.227:9303/user', {
+                username: this.username
+            }).then((res) => {
+                if(res.data.success) {
+                    let i = 0;
+                    for(const key in this.res.data.content) {
+                        if (key != "success") {
+                            this.myData[i].content = this.res.data.content[key];
+                            i++;
+                        }
+                    }
+                }
+            })
         }
     },
     methods: {

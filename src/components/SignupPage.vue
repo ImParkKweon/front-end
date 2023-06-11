@@ -179,7 +179,7 @@ export default {
             // 회원가입 api 요청
             if (this.userID_config && this.userPW_config) {
                 await axios.post(
-                    'http://backend-svc.product.svc.cluster.local/register',
+                    'http://113.198.229.227:9303/register',
                     {
                         username: this.userID,
                         pwd: this.userPW
