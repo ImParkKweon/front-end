@@ -51,8 +51,7 @@
 
         <div class="flex max-lg:flex-col justify-center content-center my-3">
             <div class="lg:mr-4" v-for="(a, i) in osOption" :key="i">
-                <input type="radio" :id="'os-option-' + i" name="os-type" :value="'os-option-' + i"
-                    class="hidden peer">
+                <input type="radio" :id="'os-option-' + i" name="os-type" :value="'os-option-' + i" class="hidden peer">
                 <label @click="selectedService.os = a.name" :for="'os-option-' + i" class="w-full p-5 max-lg:mt-3 rounded-4 border-2 border-gray-200 
                 hover:ring ring-1-600 ring-offset-4 cursor-pointer cursor-pointer
                 peer-checked:ring ring-teal-700 ring-offset-4 cursor-pointer">
@@ -85,7 +84,7 @@
                 </div>
 
                 <Dropdown :base="dropdown.cpu.base" :content="dropdown.cpu.content" :category="'cpu'"
-                    @set_dropdown_data="set_dropdown_data" :selected="dropdown.cpu.selected"/>
+                    @set_dropdown_data="set_dropdown_data" :selected="dropdown.cpu.selected" />
             </div>
 
             <!-- RAM 단위 조정 -->
@@ -115,8 +114,7 @@
                 </div>
 
                 <Dropdown :base="dropdown.gpu.base" :content="dropdown.gpu.content" :category="'gpu'"
-                :selected="dropdown.gpu.selected" 
-                    @set_dropdown_data="set_dropdown_data" />
+                    :selected="dropdown.gpu.selected" @set_dropdown_data="set_dropdown_data" />
             </div>
 
             <!-- GPU 제조사 선택 -->
@@ -125,8 +123,8 @@
                     제조사
                 </div>
 
-                <Dropdown :base="dropdown.gpuCompany.base" :content="dropdown.gpuCompany.content" :category="'gpuCompany'" :selected="dropdown.gpuCompany.selected" 
-                    @set_dropdown_data="set_dropdown_data" />
+                <Dropdown :base="dropdown.gpuCompany.base" :content="dropdown.gpuCompany.content" :category="'gpuCompany'"
+                    :selected="dropdown.gpuCompany.selected" @set_dropdown_data="set_dropdown_data" />
             </div>
         </div>
 
@@ -170,7 +168,8 @@
                 </div>
 
                 <Dropdown :base="dropdown.volumeCount.base" :content="dropdown.volumeCount.content"
-                    :category="'volumeCount'" :selected="dropdown.volumeCount.selected" @set_dropdown_data="set_dropdown_data" />
+                    :category="'volumeCount'" :selected="dropdown.volumeCount.selected"
+                    @set_dropdown_data="set_dropdown_data" />
             </div>
         </div>
 
@@ -192,8 +191,7 @@
         </div>
 
         <!-- 완료 버튼 -->
-        <button id="check-modal-button"
-            @click="subscribe_select_complete"
+        <button id="check-modal-button" @click="subscribe_select_complete"
             class="bg-[#00BF9E] hover:bg-[#12B79A] rounded-full max-md:px-32 md:px-36 py-4 flex m-auto my-4">
             <span class="text-white font-semibold max-md:text-2xl md:text-3xl">
                 완료
@@ -244,14 +242,13 @@
                         </table>
                     </div>
                     <!-- Modal footer -->
-                    <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600 justify-center">
-                        <button @click="subscribe_selected_end"
-                        type="button"
+                    <div
+                        class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600 justify-center">
+                        <button @click="subscribe_selected_end" type="button"
                             class="text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800">
                             확인
                         </button>
-                        <button @click="modal.hide()"
-                        type="button"
+                        <button @click="modal.hide()" type="button"
                             class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-teal-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                             취소
                         </button>
@@ -410,7 +407,9 @@ export default {
         async subscribe_selected_end() {
             await this.modal.hide();
 
-            let serviceData = {
+            // 현재 로그인한 계정에 구독 서비스 추가하는 api
+            await axios.post('http://113.198.229.227:9303/service', 
+            {
                 username: this.username,
                 os: this.selectedService["os"],
                 cpu: this.selectedService["cpu"],
@@ -419,15 +418,10 @@ export default {
                 gpuCompany: this.selectedService["gpuCompany"],
                 volume: this.selectedService["volume"],
                 volumeCount: this.selectedService["volumeCount"]
-            }
-
-            console.log(serviceData);
-
-            // 현재 로그인한 계정에 구독 서비스 추가하는 api
-            await axios.post('http://113.198.229.227:9303/service', serviceData)
-            .then((res) => {
-                console.log(res.data);
             })
+                .then((res) => {
+                    console.log(res.data);
+                })
 
             await this.$router.push('/mypage');
         }
@@ -442,7 +436,7 @@ export default {
         const options = {
             placement: 'center',
             backdrop: 'dynamic',
-        closable: true,
+            closable: true,
             onHide: () => {
                 console.log('modal is hidden');
             },
@@ -461,7 +455,7 @@ export default {
 
         document.getElementById("os-option-" + tmp_os_num).checked = true;
         this.selectedService.os = this.osOption[tmp_os_num].name;
-            
+
         this.selectedService.volume = tmp_volume_num;
     },
     created() {
@@ -471,7 +465,7 @@ export default {
             i++;
         }
 
-        if(localStorage.getItem('username')) {
+        if (localStorage.getItem('username')) {
             this.username = localStorage.getItem('username');
         }
     },
