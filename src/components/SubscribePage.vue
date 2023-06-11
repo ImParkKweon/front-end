@@ -419,14 +419,14 @@ export default {
             }
 
             var urlencoded = new URLSearchParams();
-            urlencoded.append("username", serviceData.os);
-            urlencoded.append("os", serviceData.os);
-            urlencoded.append("cpu", serviceData.cpu);
-            urlencoded.append("ram", serviceData.ram);
-            urlencoded.append("gpu", serviceData.gpu);
-            urlencoded.append("gpuCompany", serviceData.gpuCompany);
-            urlencoded.append("volume", serviceData.volume);
-            urlencoded.append("volumeCount", serviceData.volumeCount);
+            urlencoded.append("username", "mimi2");
+            urlencoded.append("os", "1");
+            urlencoded.append("cpu", "1");
+            urlencoded.append("ram", "1");
+            urlencoded.append("gpu", "1");
+            urlencoded.append("gpuCompany", "1");
+            urlencoded.append("volume", "1");
+            urlencoded.append("volumeCount", "1");
 
             let config = {
                 method: 'POST',
