@@ -421,6 +421,8 @@ export default {
                 volumeCount: this.selectedService.volumeCount
             }
 
+            console.log(serviceData);
+
             // 현재 로그인한 계정에 구독 서비스 추가하는 api
             await axios.post('http://113.198.229.227:9303/service', serviceData)
             .then((res) => {
