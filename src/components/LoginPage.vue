@@ -85,18 +85,25 @@ export default {
             else {
                 this.userPW_config = true;
             }
+            
+            // const axios_instance = axios.create({
+            //     baseURL: '..backend-svc.product.svc.cluster.local',
+            // })
+            // axios.defaults.baseURL = 'backend-svc.product.svc.cluster.local';
 
             // login api 요청
             if (this.userID_config && this.userPW_config) {
                 await axios.post(
-                    'http://backend-svc.product.svc.cluster.local/login',
+                    "192.168.0.17/login",
                     {
                         id: this.userID,
                         pw: this.userPW
                     }
                 ).then((res) => {
-                    console.log(res.data);
-                    if (res) {
+                    console.log(res.data.success);
+                    if (res.data.success) {
+                        localStorage.setItem('username', this.userID);
+                        console.log(localStorage.getItem('username') + " 님 환영합니다!");
                         this.$router.push('/');
                     }
                     else {
