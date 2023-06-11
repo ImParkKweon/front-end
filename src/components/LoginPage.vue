@@ -94,7 +94,7 @@ export default {
             // login api 요청
             if (this.userID_config && this.userPW_config) {
                 await axios.post(
-                    "http://192.168.0.17/login",
+                    "http://192.168.0.17:8080/login",
                     {
                         id: this.userID,
                         pw: this.userPW
