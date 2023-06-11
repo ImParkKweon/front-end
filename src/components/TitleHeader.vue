@@ -9,11 +9,11 @@
         <a class="mr-5 text-gray-900 font-bold cursor-pointer">가격정책</a>
         <a class="mr-5 text-gray-900 font-bold cursor-pointer">도움말</a>
         <a class="mr-5 text-gray-900 font-bold cursor-pointer">고객지원</a>
-        <a class="text-gray-900 font-bold cursor-pointer"
+        <a v-if="login" class="text-gray-900 font-bold cursor-pointer"
         @click="$router.push('/mypage')">마이페이지</a>
       </nav>
       
-      <div class="flex">
+      <div class="flex" v-if="!login">
         <button @click="$router.push('/login')"
           class="rounded-5 bg-white-100 text-teal-700 border-2 border-[#0F6D74] mr-3 inline-flex items-center py-2.5 px-4 max-md:mt-4 md:mt-0 max-md:text-sm 
           hover:bg-gray-100">로그인</button>
@@ -22,6 +22,14 @@
         border-transparent bg-teal-700 text-white
         rounded-5
         inline-flex items-center py-2.5 px-4 max-md:mt-4 md:mt-0 max-md:text-sm hover:bg-teal-800">회원가입</button>
+      </div>
+
+      <div class="flex font-semibold max-md:mt-4 max-md:-mb-10 items-center mb-1" v-else>
+        <span class="font-extrabold">{{ username }}</span> 님, 환영합니다!
+        <button @click="logout"
+        class="
+        border-transparent text-teal-600
+        inline-flex items-center py-2.5 px-1 md:mt-0 max-md:text-sm hover:text-teal-800 ml-1 underline">로그아웃</button>
       </div>
 
     </div>
@@ -54,13 +62,25 @@ export default {
   name: 'TitleHeader',
   data() {
     return {
-
+      username: null,
+      login: false,
     }
   },
   methods: {
+    logout() {
+      localStorage.removeItem('username');
+      this.login = false;
+      this.$router.push('/');
+    }
   },
   props: {
 
+  },
+  created() {
+    if(localStorage.getItem('username') != undefined) {
+      this.username = localStorage.getItem('username');
+      this.login = true;
+    }
   }
 }
 </script>

@@ -23,7 +23,14 @@
 
                     <tr>
                         <td colspan="2" class="text-gray-600 font-light pt-1 pb-7 text-right">
-                            0~0자 / 영문, 숫자 사용 가능
+                            <div class="flex justify-between">
+                                <span class="text-red-600">
+                                    {{ signupFail_errMsg }}
+                                </span>
+                                <span>
+                                    5~15자 / 영문, 숫자 사용 가능
+                                </span>
+                            </div>
                         </td>
                     </tr>
 
@@ -39,7 +46,7 @@
 
                     <tr>
                         <td colspan="2" class="text-gray-600 font-light pt-1 pb-7 text-right">
-                            0~0자 / 문자, 숫자, 특수문자 모두 혼용
+                            8~24자 / 문자, 숫자, 특수문자 모두 혼용
                         </td>
                     </tr>
 
@@ -135,6 +142,7 @@ export default {
             userID_config: true,
             userPW_config: true,
             checkPW_content: "default",
+            signupFail_errMsg: "",
         }
     },
     methods: {
@@ -187,10 +195,11 @@ export default {
 
                 ).then((res) => {
                     console.log(res.data);
-                    if (res) {
+                    if (res.data.success) {
                         this.$router.push('/');
                     }
                     else {
+                        this.signupFail_errMsg = res.data.message;
                         console.log("로그인 실패");
                     }
                 });

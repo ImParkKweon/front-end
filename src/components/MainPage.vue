@@ -149,6 +149,7 @@ export default {
   data() {
     return {
       carouselIndex: 0,
+      username: null,
     }
   },
   methods: {
@@ -172,12 +173,17 @@ export default {
     },
     to_subscribe_page(i) {
       console.log(i);
-      this.$router.push({
-        name: "SubscribePage",
-        params: {
-          plan_num: i,
-        }
-      });
+      if(this.username) {
+        this.$router.push({
+          name: "SubscribePage",
+          params: {
+            plan_num: i,
+          }
+        });
+      }
+      else {
+        this.$router.push('/signup');
+      }
     }
   },
   mounted() {
@@ -190,6 +196,10 @@ export default {
   // },
   created() {
     AOS.init();
+
+    if(localStorage.getItem('username') != undefined) {
+      this.username = localStorage.getItem('username');
+    }
   },
   props: {
 

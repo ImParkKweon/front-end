@@ -11,10 +11,10 @@
             <!-- 결제한 서비스 (left) -->
             <div class="md:mr-3 md:p-12 max-md:p-7 rounded-5 special-gradient xl:w-1/2 max-xl:mb-4">
                 <div class="sm:text-4xl max-sm:text-2xl font-semibold">
-                    디자이너인 당신을 위해
+                    {{ serviceName }}
                 </div>
                 <div class="text-lg">
-                    디자인 환경에 최적화된 클라우드 노트북 서비스
+                    {{ serviceContent }}
                 </div>
 
                 <table class="rounded-4 bg-white mt-4 w-full xl:h-4/5">
@@ -121,8 +121,18 @@
 import TitleHeader from './TitleHeader.vue';
 import axios from 'axios';
 
+// Vuex
+import { computed } from "vue";
+import { useStore } from "vuex";
+
 export default {
     name: 'MyPage',
+    setup() {
+        const store = useStore();
+        const plan = computed(() => store.state.plan);
+
+        return { plan }
+    },
     data() {
         return {
             myData: [
@@ -131,7 +141,7 @@ export default {
                     "content": null,
                 },
                 {
-                    "base": "CPU 단위",
+                    "base": "CPU 개수",
                     "content": null
                 },
                 {
@@ -153,28 +163,37 @@ export default {
                 {
                     "base": "Storage 개수",
                     "content": null
-                }
+                },
             ],
             username: null,
+            serviceName: null,
+            serviceContent: null,
         }
     },
     async created() {
-        if(localStorage.getItem('username')) {
+        if(localStorage.getItem('username') != undefined) {
             this.username = localStorage.getItem('username');
 
             // 현재 유저가 구독한 서비스 정보를 가져오는 api
             await axios.post('http://113.198.229.227:9303/user', {
                 username: this.username
             }).then((res) => {
+                console.log(res);
                 if(res.data.success) {
                     let i = 0;
-                    for(const key in this.res.data.content) {
-                        if (key != "success") {
-                            this.myData[i].content = this.res.data.content[key];
+                    for(const key in res.data) {
+                        if (key != "success" && key != "serviceNum") {
+                            this.myData[i].content = res.data[key];
                             i++;
+                        }
+                        if (key == "serviceNum") {
+                            this.serviceName = this.plan[res.data[key]].name;
+                            this.serviceContent = this.plan[res.data[key]].comment;
                         }
                     }
                 }
+
+                console.log(this.myData);
             })
         }
     },

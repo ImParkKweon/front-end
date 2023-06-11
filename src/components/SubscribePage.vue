@@ -271,7 +271,7 @@ import { initFlowbite } from 'flowbite';
 import { Modal } from 'flowbite';
 
 import axios from 'axios';
-import qs from "qs";
+// import qs from "qs";
 
 export default {
     name: 'SubscribePage',
@@ -308,7 +308,7 @@ export default {
                 },
                 "ram": {
                     "base": "RAM 단위를 조정해주세요.",
-                    "content": ["1GB", "2GB", "4GB", "8GB", "16GB", "32GB", "64GB"],
+                    "content": ["1", "2", "4", "8", "16", "32", "64"],
                     "selected": null,
                 },
                 "gpu": {
@@ -409,40 +409,30 @@ export default {
             await this.modal.hide();
 
             let serviceData = {
-                username: this.username,
-                os: this.selectedService["os"],
-                cpu: this.selectedService["cpu"],
-                ram: this.selectedService["ram"],
-                gpu: this.selectedService["gpu"],
-                gpuCompany: this.selectedService["gpuCompany"],
-                volume: this.selectedService["volume"],
-                volumeCount: this.selectedService["volumeCount"]
+                username: (this.username),
+                serviceNum: Number(this.$route.params.plan_num),
+                os: (this.selectedService["os"]),
+                cpu: Number(this.selectedService["cpu"]),
+                ram: Number(this.selectedService["ram"]),
+                gpu: Number(this.selectedService["gpu"]),
+                gpuCompany: (this.selectedService["gpuCompany"]),
+                volume: Number(this.selectedService["volume"]),
+                volumeCount: Number(this.selectedService["volumeCount"])
             }
 
-            var urlencoded = new URLSearchParams();
-            urlencoded.append("username", "mimi2");
-            urlencoded.append("os", "1");
-            urlencoded.append("cpu", "1");
-            urlencoded.append("ram", "1");
-            urlencoded.append("gpu", "1");
-            urlencoded.append("gpuCompany", "1");
-            urlencoded.append("volume", "1");
-            urlencoded.append("volumeCount", "1");
-
-            let config = {
-                method: 'POST',
-                maxBodyLength: Infinity,
-                url: 'http://113.198.229.227:9303/service',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: qs.stringify(serviceData)
-            };
+            // let config = {
+            //     method: 'post',
+            //     url: 'http://113.198.229.227:9303/service',
+            //     headers: {
+            //         'Content-Type': 'application/x-www-form-urlencoded',
+            //     },
+            //     body: qs.stringify(serviceData)
+            // };
 
             console.log(serviceData);
 
             // 현재 로그인한 계정에 구독 서비스 추가하는 api
-            await axios.post(config)
+            await axios.post('http://113.198.229.227:9303/service', serviceData)
                 .then((res) => {
                     console.log(res.data);
                 })
