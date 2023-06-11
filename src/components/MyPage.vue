@@ -163,7 +163,7 @@ export default {
             this.username = localStorage.getItem('username');
 
             // 현재 유저가 구독한 서비스 정보를 가져오는 api
-            await axios.get('http://113.198.229.227:9303/user', {
+            await axios.post('http://113.198.229.227:9303/user', {
                 username: this.username
             }).then((res) => {
                 if(res.data.success) {

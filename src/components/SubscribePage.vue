@@ -271,6 +271,7 @@ import { initFlowbite } from 'flowbite';
 import { Modal } from 'flowbite';
 
 import axios from 'axios';
+import qs from "qs";
 
 export default {
     name: 'SubscribePage',
@@ -435,7 +436,7 @@ export default {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                body: urlencoded
+                body: qs.stringify(serviceData)
             };
 
             console.log(serviceData);
