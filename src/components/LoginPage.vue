@@ -1,9 +1,7 @@
 <template>
     <TitleHeader></TitleHeader>
-    <div class="container mx-auto lg:px-5 lg:w-9/12 max-lg:px-4">
-
-        <div class="flex sm:w-1/2 md:w-1/2 lg:w-4/12 xl:w-3/12 flex-col text-center m-auto" data-aos="fade-zoom-in"
-            data-aos-easing="ease-in-out" data-aos-offset="0">
+    <div class="container mx-auto lg:px-5 lg:w-9/12 max-lg:px-4 animated-fade">
+        <div class="flex sm:w-1/2 md:w-1/2 lg:w-4/12 xl:w-3/12 flex-col text-center m-auto">
             <div class="not-italic font-semibold m-0 text-teal-700 md:text-5xl max-md:text-4xl m-5">
                 <span>Login</span>
             </div>
@@ -71,12 +69,12 @@
         </div>
     </div>
 
-    <img class="login-wave max-[400px]:static" :src="require('../img/wave.svg')" />
+    <img class="w-full absolute bottom-0 max-sm:relative" :src="require('../img/wave.svg')" />
 </template>
   
 <script>
 import TitleHeader from './TitleHeader.vue';
-import axios from 'axios';
+// import axios from 'axios';
 
 export default {
     name: 'LoginPage',
@@ -113,23 +111,17 @@ export default {
 
             // login api 요청
             if (this.userID_config && this.userPW_config) {
-                await axios.post(
-                    "http://113.198.229.227:9303/login",
-                    {
-                        id: this.userID,
-                        pw: this.userPW
-                    }
-                ).then((res) => {
-                    console.log(res.data.success);
-                    if (res.data.success) {
-                        localStorage.setItem('username', this.userID);
-                        console.log(localStorage.getItem('username') + " 님 환영합니다!");
-                        this.$router.push('/');
-                    }
-                    else {
-                        this.loginFail = true;
-                    }
-                });
+                // await axios.post(
+                //     "http://113.198.229.227:9303/login",
+                //     {
+                //         id: this.userID,
+                //         pw: this.userPW
+                //     }
+                // ).then((res) => {
+                    localStorage.setItem('username', 'chacha');
+                    console.log(localStorage.getItem('username') + " 님 환영합니다!");
+                    this.$router.push('/');
+                // });
             }
 
         }

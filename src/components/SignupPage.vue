@@ -1,9 +1,7 @@
 <template>
     <TitleHeader></TitleHeader>
-    <div class="container mx-auto lg:px-5 lg:w-9/12 max-lg:px-4">
-
-        <div class="w-1/3 max-2xl:w-1/2 max-xl:w-full flex flex-col text-center m-auto justify-center"
-            data-aos="fade-zoom-in" data-aos-easing="ease-in-out" data-aos-offset="0">
+    <div class="container mx-auto lg:px-5 lg:w-9/12 max-lg:px-4 animated-fade">
+        <div class="w-1/3 max-2xl:w-1/2 max-xl:w-full flex flex-col text-center m-auto justify-center">
             <div class="not-italic font-semibold m-0 text-teal-700 max-sm:text-4xl sm:text-5xl m-5">
                 <span>Sign Up</span>
             </div>
@@ -118,7 +116,7 @@
         </div>
     </div>
 
-    <img class="login-wave static" :src="require('../img/wave.svg')" />
+    <img class="w-full absolute bottom-0 max-sm:relative" :src="require('../img/wave.svg')" />
 </template>
   
 <script>
