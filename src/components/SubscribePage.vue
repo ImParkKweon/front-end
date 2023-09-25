@@ -1,7 +1,7 @@
 <template>
     <TitleHeader></TitleHeader>
-
-    <div class="relative container mx-auto lg:px-5 lg:w-9/12 max-lg:px-3 lg:my-16">
+    <div class="relative container mx-auto lg:px-5 lg:w-9/12 max-lg:px-3 lg:my-16
+    animated-fade">
         <div class="text-center md:text-5xl max-md:text-4xl max-sm:text-2xl font-bold max-md:m-2 md:m-5 mb-3 mt-4">
             클라우드 노트북의 사양을 <br />
             취향껏 커스터마이징하세요
@@ -52,6 +52,7 @@
         <div class="flex max-lg:flex-col justify-center content-center my-3">
             <div class="lg:mr-4" v-for="(a, i) in osOption" :key="i">
                 <input type="radio" :id="'os-option-' + i" name="os-type" :value="'os-option-' + i" class="hidden peer">
+
                 <label @click="selectedService.os = a.name" :for="'os-option-' + i" class="w-full p-5 max-lg:mt-3 rounded-4 border-2 border-gray-200 
                 hover:ring ring-1-600 ring-offset-4 cursor-pointer cursor-pointer
                 peer-checked:ring ring-teal-700 ring-offset-4 cursor-pointer">
@@ -258,6 +259,7 @@
         </div>
 
     </div>
+    <img class="w-full absolute bottom-0 relative" :src="require('../img/wave.svg')" />
 </template>
   
 <script>
