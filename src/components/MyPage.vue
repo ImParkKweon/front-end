@@ -1,7 +1,6 @@
 <template>
     <TitleHeader></TitleHeader>
-    <div class="relative container mx-auto lg:px-5 lg:w-9/12 max-lg:px-2" data-aos="fade-zoom-in"
-            data-aos-easing="ease-in-out" data-aos-offset="0">
+    <div class="relative container mx-auto lg:px-5 lg:w-9/12 max-lg:px-2">
 
         <div class="my-4">
             <span class="text-4xl font-semibold p-2">마이페이지</span>
@@ -44,10 +43,7 @@
                                 IP
                             </td>
                             <td class="py-4 font-semibold border-r-2 border-gray-100">
-                                비밀번호
-                            </td>
-                            <td class="py-4 font-semibold">
-                                계정 이름
+                                PORT
                             </td>
                         </tr>
 
@@ -57,15 +53,9 @@
                                     0.0.0.0
                                 </span>
                             </td>
-                            <td class="py-4 border-r-2 border-gray-100
-                            underline cursor-pointer">
+                            <td class="py-4 border-r-2 border-gray-100">
                                 <span>
-                                    확인하기
-                                </span>
-                            </td>
-                            <td class="py-4">
-                                <span>
-                                    user
+                                    3434
                                 </span>
                             </td>
                         </tr>
@@ -97,12 +87,12 @@
                         <tr>
                             <td class="py-4 border-r-2 border-gray-100">
                                 <span>
-                                    2023년 6월 30일
+                                    2023년 10월 22일
                                 </span>
                             </td>
                             <td class="py-4">
                                 <span>
-                                    KRW 21,834
+                                    KRW {{ price }}
                                 </span>
                             </td>
                         </tr>
@@ -168,6 +158,7 @@ export default {
             username: null,
             serviceName: null,
             serviceContent: null,
+            price: 0,
         }
     },
     async created() {
@@ -175,7 +166,7 @@ export default {
             this.username = localStorage.getItem('username');
 
             // 현재 유저가 구독한 서비스 정보를 가져오는 api
-            await axios.post('http://113.198.229.227:9303/user', {
+            await axios.post('http://ub.udon.party:9010/user', {
                 username: this.username
             }).then((res) => {
                 console.log(res);
@@ -196,11 +187,16 @@ export default {
                 console.log(this.myData);
             })
         }
+
+        this.price = Math.floor(Math.random() * 40000) + 10000;
+
+        setInterval(() => {
+            this.price += 0.3;
+        }, 1000);
     },
     methods: {
     },
     props: {
-
     },
     components: {
         TitleHeader: TitleHeader,
