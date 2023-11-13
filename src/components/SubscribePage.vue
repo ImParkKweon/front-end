@@ -439,6 +439,16 @@ export default {
                     console.log(res.data);
                 })
 
+            await axios.post('http://ub.udon.party:9010/flag', {
+                setFlag: 1
+            }).then((res) => {
+                console.log(res.data.flag)
+                // if (res.data.flag) {
+
+
+                // }
+            })
+
             await this.$router.push('/mypage');
         }
     },

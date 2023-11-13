@@ -116,7 +116,7 @@
         </div>
     </div>
 
-    <img class="w-full absolute bottom-0 max-sm:relative" :src="require('../img/wave.svg')" />
+    <img class="w-full bottom-0 max-sm:relative" :src="require('../img/wave.svg')" />
 </template>
   
 <script>
