@@ -29,16 +29,16 @@ export default createStore({
           // os, cpu, ram, gpu, gpuCompany, volume, volumeCount
           "select": [0, 
             0, 0, 0, 0, 
-            180, 0],
+            180, 0], 
         },
         {
           "src": '3Ddesigner_plan_img',
           "name": "그래픽 소프트웨어 사용자를 위해",
           "comment": "높은 그래픽 사양의 클라우드 노트북 서비스",
           "spec": [
-            "3D 작업을 위한 고성능 GPU 제공",
-            "무거운 파일 커다란 스토리지",
-            "3D 디스플레이에 적합한 Mac OS"
+            "3D 작업용 고성능 GPU 제공",
+            "무거운 파일은 커다란 스토리지에",
+            "3D 디스플레이에 적합한 화면"
           ],
           // os, cpu, ram, gpu, gpuCompany, volume, volumeCount
           "select": [0, 
